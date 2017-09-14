@@ -18,12 +18,10 @@ namespace TestMongo
         {
 
             DbEngine dbEngine = new DbEngine();
-
+            var sender = new DataSender(dbEngine);
             dbEngine.RunAllTests().Wait();
-
-            var sender = new DataSender();
+          
             Console.ReadLine();
-
         }     
     }
 }
