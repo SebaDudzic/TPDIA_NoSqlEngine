@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using MongoDB.Bson;
 using MongoDB.Driver;
+using NoSqlEngineConsoleApp;
 
 namespace TestMongo
 {
@@ -14,7 +15,9 @@ namespace TestMongo
 
         static void Main(string[] args)
         {
+            DbEngine dbEngine = new DbEngine();
 
+            dbEngine.RunAllTests().Wait();
         }     
     }
 }
