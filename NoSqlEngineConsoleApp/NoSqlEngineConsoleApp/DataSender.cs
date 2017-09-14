@@ -28,24 +28,24 @@ namespace NoSqlEngineConsoleApp
 
         private void ReadFile()
         {
-            var path = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).FullName).Parent.FullName;
-            var nozzleMeasures = File.ReadLines(Path.Combine(path, NOZZLE_MEASURES_FILE_PATH)).ToArray();
-            for (int i = 0; i < 100; i++)
-            {
-                this.nozzleMeasures.Add(NozzleMeasure.Parse(nozzleMeasures[i]));
-            }
+            //var path = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).FullName).Parent.FullName;
+            //var nozzleMeasures = File.ReadLines(Path.Combine(path, NOZZLE_MEASURES_FILE_PATH)).ToArray();
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    this.nozzleMeasures.Add(NozzleMeasure.Parse(nozzleMeasures[i]));
+            //}
 
-            var tankMeasures = File.ReadAllLines(Path.Combine(path, TANK_MEASURES_FILE_PATH)).ToArray();
-            for (int i = 0; i < 100; i++)
-            {
-                this.tankMeasures.Add(TankMeasure.Parse(tankMeasures[i]));
-            }
+            //var tankMeasures = File.ReadAllLines(Path.Combine(path, TANK_MEASURES_FILE_PATH)).ToArray();
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    this.tankMeasures.Add(TankMeasure.Parse(tankMeasures[i]));
+            //}
 
-            var refuels = File.ReadAllLines(Path.Combine(path, REFUELS_FILE_PATH)).ToArray();
-            for (int i = 0; i < refuels.Count() - 1; i++)
-            {
-                this.refuels.Add(Refuel.Parse(refuels[i]));
-            }
+            //var refuels = File.ReadAllLines(Path.Combine(path, REFUELS_FILE_PATH)).ToArray();
+            //for (int i = 0; i < refuels.Count() - 1; i++)
+            //{
+            //    this.refuels.Add(Refuel.Parse(refuels[i]));
+            //}
 
         }
 

@@ -21,13 +21,13 @@ namespace NoSqlEngineConsoleApp
         public Refuel(DateTime date,
                          int tankID,
                          float fuelCapacity,
-                         float fuelTemperature
+                         float tankSpeed
                         )
         {
             this.date = date;
             this.tankID = tankID;
             this.fuelCapacity = fuelCapacity;
-            this.tankSpeed = fuelTemperature;
+            this.tankSpeed = tankSpeed;
         }
 
         public static Refuel Parse(string item)
