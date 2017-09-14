@@ -41,7 +41,7 @@ namespace NoSqlEngineConsoleApp
             while(true)
             {
                 await Task.Delay(1000);
-                await AddTankMeasureAsync();           
+                AddTankMeasure();           
             }
         }
 
@@ -50,11 +50,12 @@ namespace NoSqlEngineConsoleApp
             while (true)
             {
                 await Task.Delay(300);
-                await ReadCollectionCount(tankMeasuresCollection);
+                ReadCollectionCount(tankMeasuresCollection);
             }
         }
 
-        private async Task AddTankMeasureAsync()
+
+        private async void AddTankMeasure()
         {
             Console.WriteLine("AddTankMeasureAsync");
 
@@ -69,7 +70,7 @@ namespace NoSqlEngineConsoleApp
             await tankMeasuresCollection.InsertOneAsync(document);
         }
 
-        private async Task ReadCollectionCount(IMongoCollection<BsonDocument> collection)
+        private async void ReadCollectionCount(IMongoCollection<BsonDocument> collection)
         {
             var filter = new BsonDocument();
             var count = 0;
