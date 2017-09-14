@@ -44,10 +44,10 @@ namespace NoSqlEngineConsoleApp
             this.waterCapacity = waterCapacity;
         }
 
-        public static NozzleMeasure Parse(string item)
+        public static TankMeasure Parse(string item)
         {
             var splited = item.Split(';');
-            var result = new NozzleMeasure();
+            var result = new TankMeasure();
             result.date = DateTime.Parse(splited[0]);
             result.locationID = Utilities.ParseToInt(splited[1]);
             result.meterID = Utilities.ParseToInt(splited[2]);
