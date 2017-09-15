@@ -24,8 +24,12 @@ namespace NoSqlEngineConsoleApp
         //debug
         private System.Random random;
 
-        public DbEngine()
+        private Func<bool> shouldAddTankMeasures;
+
+        public DbEngine(Func<bool> shouldAddTankMeasures)
         {
+            this.shouldAddTankMeasures = shouldAddTankMeasures;
+
             _client = new MongoClient();
             _client.DropDatabase(DB_NAME);
             _database = _client.GetDatabase(DB_NAME);
@@ -139,15 +143,21 @@ namespace NoSqlEngineConsoleApp
             while (true)
             {
                 await Task.Delay(1000);
-                AddTankMeasure(new TankMeasure(System.DateTime.Now,
-                    random.Next(0, 5),
-                    random.Next(0, 5),
-                    random.Next(0, 5),
-                    (float)random.NextDouble(),
-                    (float)random.NextDouble(),
-                    (float)random.NextDouble(),
-                    (float)random.NextDouble(),
-                    (float)random.NextDouble()));
+
+                shouldAddTankMeasures.Invoke();
+
+                if (shouldAddTankMeasures())
+                {
+                    AddTankMeasure(new TankMeasure(System.DateTime.Now,
+                        random.Next(0, 5),
+                        random.Next(0, 5),
+                        random.Next(0, 5),
+                        (float)random.NextDouble(),
+                        (float)random.NextDouble(),
+                        (float)random.NextDouble(),
+                        (float)random.NextDouble(),
+                        (float)random.NextDouble()));
+                }
             }
         }
 

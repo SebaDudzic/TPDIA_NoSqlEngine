@@ -31,14 +31,24 @@ namespace WPFDbEngineDemo
 
         private void Init()
         {
-            dbEngine = new DbEngine();
+            dbEngine = new DbEngine(ShouldAddTankMeasuresCheckBoxValue);
             //var sender = new DataSender(dbEngine);
             dbEngine.RunAllTests();
+            RefreshUI();
         }
 
-        private void Click(object sender, RoutedEventArgs e)
+        private async Task RefreshUI()
         {
-            countLabel.Content = dbEngine.GetTankMeasuresCount();
+            while (true)
+            {
+                await Task.Delay(100);
+                tankMeasuresCount.Content = dbEngine.GetTankMeasuresCount();
+            }
+        }
+
+        private bool ShouldAddTankMeasuresCheckBoxValue()
+        {
+            return shouldAddTankMeasuresCheckBox.IsChecked.Value;
         }
     }
 }

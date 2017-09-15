@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="DbEngineDemo" Height="350" Width="525">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Height="18" Width="117"/>
-        <RadioButton Content="RadioButton" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="TestButton" Content="Button" HorizontalAlignment="Left" Margin="196,48,0,0" VerticalAlignment="Top" Width="75" Click="Click"/>
-        <Label x:Name="countLabel" Content="Label" HorizontalAlignment="Left" Margin="298,20,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="tankMeasuresCount" Content="25645" HorizontalAlignment="Left" Margin="139,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.386,0.423" Height="26"/>
+        <Label Content="TankMeasuresCount:" HorizontalAlignment="Left" Margin="20,31,0,0" VerticalAlignment="Top"/>
+        <GroupBox Header="TankMeasures" HorizontalAlignment="Left" Height="76" Margin="10,10,0,0" VerticalAlignment="Top" Width="461" FontWeight="Bold"/>
+        <CheckBox x:Name="shouldAddTankMeasuresCheckBox" Content="AddData" HorizontalAlignment="Left" Margin="28,57,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>
