@@ -20,10 +20,78 @@ namespace NoSqlEngineConsoleApp
         private List<Refuel> refuels = new List<Refuel>();
         private DbEngine dbEngine;
 
-        public DataSender(DbEngine dbEngine)
+        //SenderConfigurationFromUI
+        private Func<double> getSenderTimeScale;
+
+        //debug
+        private System.Random random;
+
+        public DataSender(DbEngine dbEngine, Func<double> getSenderTimeScale)
         {
             this.dbEngine = dbEngine;
+            this.getSenderTimeScale = getSenderTimeScale;
+            random = new System.Random();
             ReadFile();
+            RunAllSenders();
+        }
+
+        private void RunAllSenders()
+        {
+            RunTankMeasureSender();
+            RunTestAddNozzleMeasure();
+        }
+
+        private async Task RunTankMeasureSender()
+        {
+            while (true)
+            {
+                double defaultCountPerSecond = 1;
+
+                if (getSenderTimeScale() != 0)
+                {
+                    await Task.Delay((int)((1000 / defaultCountPerSecond) / getSenderTimeScale()));
+
+                    dbEngine.AddTankMeasure(new TankMeasure(
+                        System.DateTime.Now,
+                        random.Next(0, 5),
+                        random.Next(0, 5),
+                        random.Next(0, 5),
+                        (float)random.NextDouble(),
+                        (float)random.NextDouble(),
+                        (float)random.NextDouble(),
+                        (float)random.NextDouble(),
+                        (float)random.NextDouble()));
+                }
+                else
+                {
+                    await Task.Delay(100);
+                }
+            }
+        }
+
+        private async Task RunTestAddNozzleMeasure()
+        {
+            while (true)
+            {
+                double defaultCountPerSecond = 2;
+
+                if (getSenderTimeScale() != 0)
+                {
+                    await Task.Delay((int)((1000 / defaultCountPerSecond) / getSenderTimeScale()));
+
+                    dbEngine.AddNozzleMeasure(new NozzleMeasure(System.DateTime.Now,
+                        random.Next(0, 5),
+                        random.Next(0, 5),
+                        random.Next(0, 5),
+                        (float)random.NextDouble(),
+                        (float)random.NextDouble(),
+                        random.Next(0, 5)));
+                }
+                else
+                {
+                    await Task.Delay(100);
+                }
+            }
         }
 
         private void ReadFile()

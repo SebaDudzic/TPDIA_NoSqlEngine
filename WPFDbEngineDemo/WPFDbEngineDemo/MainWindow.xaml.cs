@@ -22,6 +22,7 @@ namespace WPFDbEngineDemo
     public partial class MainWindow : Window
     {
         DbEngine dbEngine;
+        DataSender dataSender;
 
         public MainWindow()
         {
@@ -31,9 +32,8 @@ namespace WPFDbEngineDemo
 
         private void Init()
         {
-            dbEngine = new DbEngine(ShouldAddTankMeasuresCheckBoxValue);
-            //var sender = new DataSender(dbEngine);
-            dbEngine.RunAllTests();
+            dbEngine = new DbEngine();
+            dataSender = new DataSender(dbEngine, GetSenderTimeScale);
             RefreshUI();
         }
 
@@ -41,14 +41,15 @@ namespace WPFDbEngineDemo
         {
             while (true)
             {
-                await Task.Delay(100);
+                await Task.Delay(10);
                 tankMeasuresCount.Content = dbEngine.GetTankMeasuresCount();
+                nozzleMeasuresCount.Content = dbEngine.GetNozzleMeasureCount();
             }
         }
 
-        private bool ShouldAddTankMeasuresCheckBoxValue()
+        private double GetSenderTimeScale()
         {
-            return shouldAddTankMeasuresCheckBox.IsChecked.Value;
+            return senderTimeScale.Value;
         }
     }
 }

@@ -7,10 +7,14 @@
         mc:Ignorable="d"
         Title="DbEngineDemo" Height="350" Width="525">
     <Grid>
-        <Label x:Name="tankMeasuresCount" Content="25645" HorizontalAlignment="Left" Margin="139,31,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.386,0.423" Height="26"/>
-        <Label Content="TankMeasuresCount:" HorizontalAlignment="Left" Margin="20,31,0,0" VerticalAlignment="Top"/>
-        <GroupBox Header="TankMeasures" HorizontalAlignment="Left" Height="76" Margin="10,10,0,0" VerticalAlignment="Top" Width="461" FontWeight="Bold"/>
-        <CheckBox x:Name="shouldAddTankMeasuresCheckBox" Content="AddData" HorizontalAlignment="Left" Margin="28,57,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="senderTimeScale" HorizontalAlignment="Left" Margin="85,16,0,0" VerticalAlignment="Top" Width="251" TickPlacement="Both" Value="1"/>
+        <GroupBox Header="TankMeasures" HorizontalAlignment="Left" Height="76" Margin="17,57,0,0" VerticalAlignment="Top" Width="461" FontWeight="Bold"/>
+        <Label x:Name="tankMeasuresCount" Content="25645" HorizontalAlignment="Left" Margin="146,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.386,0.423" Height="26"/>
+        <Label Content="TankMeasuresCount:" HorizontalAlignment="Left" Margin="27,78,0,0" VerticalAlignment="Top"/>
+        <Label Content="TimeScale" HorizontalAlignment="Left" Margin="17,20,0,0" VerticalAlignment="Top"/>
+        <GroupBox Header="NozzleMeasures" HorizontalAlignment="Left" Height="76" Margin="17,143,0,0" VerticalAlignment="Top" Width="461" FontWeight="Bold"/>
+        <Label x:Name="nozzleMeasuresCount" Content="25645" HorizontalAlignment="Left" Margin="158,164,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.386,0.423" Height="26"/>
+        <Label Content="NozzleMeasuresCount:" HorizontalAlignment="Left" Margin="27,164,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

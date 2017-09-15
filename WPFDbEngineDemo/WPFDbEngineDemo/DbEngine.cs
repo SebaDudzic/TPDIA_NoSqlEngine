@@ -21,23 +21,14 @@ namespace NoSqlEngineConsoleApp
         private const string NOZZLE_MEASURES_NAME = "NozzleMeasures";
         private const string REFUELS_NAME = "Refuels";
 
-        //debug
-        private System.Random random;
-
-        private Func<bool> shouldAddTankMeasures;
-
-        public DbEngine(Func<bool> shouldAddTankMeasures)
+        public DbEngine()
         {
-            this.shouldAddTankMeasures = shouldAddTankMeasures;
-
             _client = new MongoClient();
             _client.DropDatabase(DB_NAME);
             _database = _client.GetDatabase(DB_NAME);
             tankMeasuresCollection = _database.GetCollection<BsonDocument>(TANK_MEASURES_NAME);
             nozzleMeasuresCollection = _database.GetCollection<BsonDocument>(NOZZLE_MEASURES_NAME);
             refuelsCollection = _database.GetCollection<BsonDocument>(REFUELS_NAME);
-            //debug
-            random = new System.Random();
         }
 
         //--Public_Interface_Save------------------------------------//
@@ -110,6 +101,12 @@ namespace NoSqlEngineConsoleApp
             return task.Result;
         }
 
+        public int GetNozzleMeasureCount()
+        {
+            Task<int> task = Task<int>.Factory.StartNew(() => ReadCollectionCount(nozzleMeasuresCollection).Result);
+            return task.Result;
+        }
+
         //--Private--------------------------------------------------//
 
         private async Task<int> ReadCollectionCount(IMongoCollection<BsonDocument> collection)
@@ -130,61 +127,5 @@ namespace NoSqlEngineConsoleApp
             }
             return count;
         }
-
-        //--DEBUG----------------//
-
-        public async Task RunAllTests()
-        {
-            await Task.WhenAll(RunTestAddTankMeasure(), RunTestAddNozzleMeasure(), RunTestReadTankMeasuesCount());
-        }
-
-        private async Task RunTestAddTankMeasure()
-        {
-            while (true)
-            {
-                await Task.Delay(1000);
-
-                shouldAddTankMeasures.Invoke();
-
-                if (shouldAddTankMeasures())
-                {
-                    AddTankMeasure(new TankMeasure(System.DateTime.Now,
-                        random.Next(0, 5),
-                        random.Next(0, 5),
-                        random.Next(0, 5),
-                        (float)random.NextDouble(),
-                        (float)random.NextDouble(),
-                        (float)random.NextDouble(),
-                        (float)random.NextDouble(),
-                        (float)random.NextDouble()));
-                }
-            }
-        }
-
-        private async Task RunTestAddNozzleMeasure()
-        {
-            while (true)
-            {
-                await Task.Delay(750);
-                AddNozzleMeasure(new NozzleMeasure(System.DateTime.Now,
-                    random.Next(0, 5),
-                    random.Next(0, 5),
-                    random.Next(0, 5),
-                    (float)random.NextDouble(),
-                    (float)random.NextDouble(),
-                    random.Next(0, 5)));
-            }
-        }
-
-        private async Task RunTestReadTankMeasuesCount()
-        {
-            while (true)
-            {
-                await Task.Delay(300);
-                Console.WriteLine("TankMeasuesCount: " + GetTankMeasuresCount());
-            }
-        }
-
-        //--DEBUG_END----------------//
     }
 }
