@@ -41,15 +41,32 @@ namespace WPFDbEngineDemo
         {
             while (true)
             {
-                await Task.Delay(10);
+                await Task.Delay(100);
                 tankMeasuresCount.Content = dbEngine.GetTankMeasuresCount();
                 nozzleMeasuresCount.Content = dbEngine.GetNozzleMeasureCount();
+
+                TankMeasure latestTankMeasure = dbEngine.GetLatestTankMeasure();
+                if (latestTankMeasure != null)
+                {
+                    tank0_LastRefresh.Content = latestTankMeasure.date;
+                    tank0_FuelAmount.Content = latestTankMeasure.fuelHeight;
+                    tank0_FuelTemperature.Content = latestTankMeasure.fuelTemperature;
+                }
             }
         }
 
         private double GetSenderTimeScale()
         {
             return senderTimeScale.Value;
+        }
+
+        private void RefreshTank0(object sender, RoutedEventArgs e)
+        {
+            TankMeasure latestTankMeasure = dbEngine.GetLatestTankMeasure();
+
+            tank0_LastRefresh.Content = latestTankMeasure.date;
+            tank0_FuelAmount.Content = latestTankMeasure.fuelHeight;
+            tank0_FuelTemperature.Content = latestTankMeasure.fuelTemperature;
         }
     }
 }

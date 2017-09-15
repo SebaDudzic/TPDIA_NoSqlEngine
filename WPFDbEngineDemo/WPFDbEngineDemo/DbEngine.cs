@@ -24,7 +24,7 @@ namespace NoSqlEngineConsoleApp
         public DbEngine()
         {
             _client = new MongoClient();
-            _client.DropDatabase(DB_NAME);
+            //_client.DropDatabase(DB_NAME);
             _database = _client.GetDatabase(DB_NAME);
             tankMeasuresCollection = _database.GetCollection<BsonDocument>(TANK_MEASURES_NAME);
             nozzleMeasuresCollection = _database.GetCollection<BsonDocument>(NOZZLE_MEASURES_NAME);
@@ -36,23 +36,7 @@ namespace NoSqlEngineConsoleApp
         public async void AddTankMeasure(TankMeasure data)
         {
             Console.WriteLine("AddTankMeasure");
-
-            var document = new BsonDocument
-            {
-                { "id", Guid.NewGuid().ToString("N") },
-                { "date", data.date },
-                { "locationID", data.locationID },
-                { "meterID", data.meterID },
-                { "tankID", data.tankID },
-                { "fuelHeight", data.fuelHeight },
-                { "fuelCapacity", data.fuelCapacity },
-                { "fuelTemperature", data.fuelTemperature },
-                { "waterHeight", data.waterHeight },
-                { "waterCapacity", data.waterCapacity },
-            };
-
-            //Console.WriteLine(document);
-            await tankMeasuresCollection.InsertOneAsync(document);
+            await tankMeasuresCollection.InsertOneAsync(TankMeasure.Parse(data));
         }
 
         public async void AddNozzleMeasure(NozzleMeasure data)
@@ -105,6 +89,19 @@ namespace NoSqlEngineConsoleApp
         {
             Task<int> task = Task<int>.Factory.StartNew(() => ReadCollectionCount(nozzleMeasuresCollection).Result);
             return task.Result;
+        }
+
+        public TankMeasure GetLatestTankMeasure()
+        {
+            try
+            {
+                Task<BsonDocument> result = tankMeasuresCollection.Aggregate().SortByDescending((a) => a["date"]).FirstAsync();
+                return TankMeasure.Parse(result.Result);
+            }
+            catch(Exception e)
+            {
+                return null;
+            }
         }
 
         //--Private--------------------------------------------------//
