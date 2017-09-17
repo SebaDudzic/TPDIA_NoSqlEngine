@@ -31,5 +31,18 @@ namespace NoSqlEngineConsoleApp
                 return -1;
             }
         }
+
+        public static string ListToString<T>(this List<T> list)
+        {
+            StringBuilder builder = new StringBuilder();
+
+            foreach (var item in list)
+            {
+                builder.Append(item);
+                builder.Append(';');
+            }
+
+            return builder.ToString();
+        }
     }
 }

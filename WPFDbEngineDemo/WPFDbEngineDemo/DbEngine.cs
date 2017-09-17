@@ -75,6 +75,31 @@ namespace NoSqlEngineConsoleApp
             }
         }
 
+        public List<int> GetTankMeasuresUniqueIDs()
+        {
+            try
+            {
+                return tankMeasuresCollection.Distinct<int>("tankID", new BsonDocument()).ToList().OrderBy(x=>x).ToList();
+            }
+            catch(Exception e)
+            {
+                return new List<int>();
+            }
+        }
+
+        public List<TankMeasure> GetLatestTankMeasures(int amount)
+        {
+            try
+            {
+                return tankMeasuresCollection.Aggregate().SortByDescending((a) => a["date"]).Limit(amount)
+                    .ToList().Select(x=>TankMeasure.Parse(x)).ToList();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         //--Private--------------------------------------------------//
 
         private async Task<int> ReadCollectionCount(IMongoCollection<BsonDocument> collection)

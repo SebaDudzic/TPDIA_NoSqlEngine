@@ -15,7 +15,7 @@
         <GroupBox Header="NozzleMeasures" HorizontalAlignment="Left" Height="76" Margin="17,143,0,0" VerticalAlignment="Top" Width="461" FontWeight="Bold"/>
         <Label x:Name="nozzleMeasuresCount" Content="25645" HorizontalAlignment="Left" Margin="158,164,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.386,0.423" Height="26"/>
         <Label Content="NozzleMeasuresCount:" HorizontalAlignment="Left" Margin="27,164,0,0" VerticalAlignment="Top"/>
-        <Canvas HorizontalAlignment="Left" Height="67" Margin="27,232,0,0" VerticalAlignment="Top" Width="139" Background="#FFB9B9B9">
+        <Canvas HorizontalAlignment="Left" Height="67" Margin="19,246,0,0" VerticalAlignment="Top" Width="139" Background="#FFB9B9B9">
             <Label Content="Tank0" FontWeight="Bold"/>
             <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
             <Label x:Name="tank0_LastRefresh" Content="2818" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="53"/>
@@ -24,7 +24,11 @@
             <Label Content="FuelTemperature:" Canvas.Top="45" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
             <Label x:Name="tank0_FuelTemperature" Content="2818" Canvas.Top="45" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="75"/>
         </Canvas>
-        <Button Content="Refresh" HorizontalAlignment="Left" Margin="188,274,0,0" VerticalAlignment="Top" Width="75" Click="RefreshTank0"/>
+        <Label Content="AvailavbleTanks:" HorizontalAlignment="Left" Margin="19,219,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.237,-0.115"/>
+        <Label x:Name="tankIDsLabel" Content="1;2;5;" HorizontalAlignment="Left" Margin="108,220,0,0" VerticalAlignment="Top" Width="364"/>
+        <Button Content="TestReadLastXTankMeasures" HorizontalAlignment="Left" Margin="19,561,0,0" VerticalAlignment="Top" Width="184" Height="36" Click="TestReadLastTankMeasuresAmount"/>
+        <TextBox x:Name="TestReadLastTankMeasuresAmountTextBox" HorizontalAlignment="Left" Height="23" Margin="113,533,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="87"/>
+        <Label Content="AmountToRead:" HorizontalAlignment="Left" Margin="19,530,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

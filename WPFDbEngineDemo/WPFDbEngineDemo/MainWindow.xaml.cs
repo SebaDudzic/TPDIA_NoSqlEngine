@@ -53,6 +53,9 @@ namespace WPFDbEngineDemo
                     tank0_FuelAmount.Content = latestTankMeasure.fuelHeight;
                     tank0_FuelTemperature.Content = latestTankMeasure.fuelTemperature;
                 }
+
+                List<int> uniqueTankIDs = dbEngine.GetTankMeasuresUniqueIDs();
+                tankIDsLabel.Content = uniqueTankIDs.ListToString();
             }
         }
 
@@ -61,13 +64,10 @@ namespace WPFDbEngineDemo
             return senderTimeScale.Value;
         }
 
-        private void RefreshTank0(object sender, RoutedEventArgs e)
+        private void TestReadLastTankMeasuresAmount(object sender, RoutedEventArgs e)
         {
-            TankMeasure latestTankMeasure = dbEngine.GetLatestTankMeasure();
-
-            tank0_LastRefresh.Content = latestTankMeasure.date;
-            tank0_FuelAmount.Content = latestTankMeasure.fuelHeight;
-            tank0_FuelTemperature.Content = latestTankMeasure.fuelTemperature;
+            List<TankMeasure> tankMeasures = dbEngine.GetLatestTankMeasures(Int32.Parse(TestReadLastTankMeasuresAmountTextBox.Text));
+            MessageBox.Show(string.Format("Success! Readed measures count: {0}", tankMeasures.Count));
         }
     }
 }
