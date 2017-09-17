@@ -18,23 +18,17 @@ namespace NoSqlEngineConsoleApp
 
         private System.DateTime startDataTime;
         private TimeSpan simulationTime;
-
-        //private List<NozzleMeasure> nozzleMeasures = new List<NozzleMeasure>();
-        //private List<TankMeasure> tankMeasures = new List<TankMeasure>();
-        //private List<Refuel> refuels = new List<Refuel>();
         private DbEngine dbEngine;
 
         //SenderConfigurationFromUI
         private Func<double> getSenderTimeScale;
 
-        //debug
-        private System.Random random;
+        private const int REFRESH_TIME = 50;
 
         public DataSender(DbEngine dbEngine, Func<double> getSenderTimeScale)
         {
             this.dbEngine = dbEngine;
             this.getSenderTimeScale = getSenderTimeScale;
-            random = new System.Random();
             simulationTime = new TimeSpan();
             OpenFilesStreams();
             RunAllSenders();
@@ -51,7 +45,7 @@ namespace NoSqlEngineConsoleApp
         {
             while (true)
             {
-                await Task.Delay(50);
+                await Task.Delay(REFRESH_TIME);
                 simulationTime += new TimeSpan(0, 0, 0, 0, (int)(50 * getSenderTimeScale()));
             }
         }
@@ -60,9 +54,7 @@ namespace NoSqlEngineConsoleApp
         {
             while (true)
             {
-                //double defaultCountPerSecond = 1;
-
-                await Task.Delay(10);
+                await Task.Delay(REFRESH_TIME);
 
                 while (waitingTankMeasures.Count > 0 && IsTimeToSend(waitingTankMeasures.First().date))
                 {

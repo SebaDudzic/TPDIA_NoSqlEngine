@@ -45,19 +45,19 @@ namespace WPFDbEngineDemo
                 timeScaleLabel.Content = string.Format("{0:0.00}", GetSenderTimeScale());
                 currentSimulationTimeLabel.Content = dataSender.GetCurrentDataTime().ToString();
                 tankMeasuresCount.Content = dbEngine.GetTankMeasuresCount();
-                //nozzleMeasuresCount.Content = dbEngine.GetNozzleMeasureCount();
+                nozzleMeasuresCount.Content = dbEngine.GetNozzleMeasureCount();
 
-                //TankMeasure latestTankMeasure = dbEngine.GetLatestTankMeasure();
+                TankMeasure latestTankMeasure = dbEngine.GetLatestTankMeasure();
 
-                //if (latestTankMeasure != null)
-                //{
-                //    tank0_LastRefresh.Content = latestTankMeasure.date;
-                //    tank0_FuelAmount.Content = latestTankMeasure.fuelHeight;
-                //    tank0_FuelTemperature.Content = latestTankMeasure.fuelTemperature;
-                //}
+                if (latestTankMeasure != null)
+                {
+                    tank0_LastRefresh.Content = latestTankMeasure.date;
+                    tank0_FuelAmount.Content = latestTankMeasure.fuelHeight;
+                    tank0_FuelTemperature.Content = latestTankMeasure.fuelTemperature;
+                }
 
-                //List<int> uniqueTankIDs = dbEngine.GetTankMeasuresUniqueIDs();
-                //tankIDsLabel.Content = uniqueTankIDs.ListToString();
+                List<int> uniqueTankIDs = dbEngine.GetTankMeasuresUniqueIDs();
+                tankIDsLabel.Content = uniqueTankIDs.ListToString();
             }
         }
 
