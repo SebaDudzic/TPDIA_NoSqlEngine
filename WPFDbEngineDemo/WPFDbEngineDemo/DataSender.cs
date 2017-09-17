@@ -9,15 +9,19 @@ namespace NoSqlEngineConsoleApp
 {
     class DataSender
     {
-        private const string NOZZLE_MEASURES_FILE_PATH = "nozzleMeasures.data";
-        private const string TANK_MEASURES_FILE_PATH = "tankMeasures.data";
-        private const string REFUELS_FILE_PATH = "tankMeasures.data";
+        private const string NOZZLE_MEASURES_FILE_PATH = "nozzleMeasures.log";
+        private const string TANK_MEASURES_FILE_PATH = "tankMeasures.log";
+        private const string REFUELS_FILE_PATH = "tankMeasures.log";
 
-        private const int preCachedData = 100;
+        private StreamReader tankMeasuresFile;
+        private List<TankMeasure> waitingTankMeasures = new List<TankMeasure>();
 
-        private List<NozzleMeasure> nozzleMeasures = new List<NozzleMeasure>();
-        private List<TankMeasure> tankMeasures = new List<TankMeasure>();
-        private List<Refuel> refuels = new List<Refuel>();
+        private System.DateTime simulationTimeStart;
+        private System.DateTime dataTimeStart;
+
+        //private List<NozzleMeasure> nozzleMeasures = new List<NozzleMeasure>();
+        //private List<TankMeasure> tankMeasures = new List<TankMeasure>();
+        //private List<Refuel> refuels = new List<Refuel>();
         private DbEngine dbEngine;
 
         //SenderConfigurationFromUI
@@ -31,92 +35,81 @@ namespace NoSqlEngineConsoleApp
             this.dbEngine = dbEngine;
             this.getSenderTimeScale = getSenderTimeScale;
             random = new System.Random();
-            ReadFile();
+            simulationTimeStart = System.DateTime.Now;
+            OpenFilesStreams();
             RunAllSenders();
         }
 
         private void RunAllSenders()
         {
             RunTankMeasureSender();
-            RunTestAddNozzleMeasure();
+            //RunNozzleMeasureSender();
         }
 
         private async Task RunTankMeasureSender()
         {
             while (true)
             {
-                double defaultCountPerSecond = 1;
+                //double defaultCountPerSecond = 1;
 
-                if (getSenderTimeScale() != 0)
+                await Task.Delay(10);
+                
+                while(waitingTankMeasures.Count > 0 && IsTimeToSend(waitingTankMeasures.First().date))
                 {
-                    await Task.Delay((int)((1000 / defaultCountPerSecond) / getSenderTimeScale()));
-
-                    dbEngine.AddTankMeasure(new TankMeasure(
-                        System.DateTime.Now,
-                        random.Next(0, 5),
-                        random.Next(0, 5),
-                        random.Next(0, 5),
-                        (float)random.NextDouble(),
-                        (float)random.NextDouble(),
-                        (float)random.NextDouble(),
-                        (float)random.NextDouble(),
-                        (float)random.NextDouble()));
-                }
-                else
-                {
-                    await Task.Delay(100);
+                    dbEngine.AddTankMeasure(waitingTankMeasures.First());
+                    waitingTankMeasures.RemoveAt(0);
                 }
             }
         }
 
-        private async Task RunTestAddNozzleMeasure()
+        //private async Task RunNozzleMeasureSender()
+        //{
+        //    while (true)
+        //    {
+        //        double defaultCountPerSecond = 2;
+
+        //        if (getSenderTimeScale() != 0)
+        //        {
+        //            await Task.Delay((int)((1000 / defaultCountPerSecond) / getSenderTimeScale()));
+
+        //            dbEngine.AddNozzleMeasure(new NozzleMeasure(System.DateTime.Now,
+        //                random.Next(0, 5),
+        //                random.Next(0, 5),
+        //                random.Next(0, 5),
+        //                (float)random.NextDouble(),
+        //                (float)random.NextDouble(),
+        //                random.Next(0, 5)));
+        //        }
+        //        else
+        //        {
+        //            await Task.Delay(100);
+        //        }
+        //    }
+        //}
+
+        private void OpenFilesStreams()
         {
-            while (true)
+            var currentDirPath = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).FullName).Parent.FullName;
+
+            tankMeasuresFile = new System.IO.StreamReader(Path.Combine(currentDirPath, TANK_MEASURES_FILE_PATH));
+            ReadDataTankMeasures(20);
+            dataTimeStart = waitingTankMeasures[0].date;
+        }
+
+        private void ReadDataTankMeasures(int amount)
+        {
+            for (int i = 0; i < amount; i++)
             {
-                double defaultCountPerSecond = 2;
-
-                if (getSenderTimeScale() != 0)
-                {
-                    await Task.Delay((int)((1000 / defaultCountPerSecond) / getSenderTimeScale()));
-
-                    dbEngine.AddNozzleMeasure(new NozzleMeasure(System.DateTime.Now,
-                        random.Next(0, 5),
-                        random.Next(0, 5),
-                        random.Next(0, 5),
-                        (float)random.NextDouble(),
-                        (float)random.NextDouble(),
-                        random.Next(0, 5)));
-                }
-                else
-                {
-                    await Task.Delay(100);
-                }
+                waitingTankMeasures.Add(TankMeasure.Parse(tankMeasuresFile.ReadLine()));
             }
         }
 
-        private void ReadFile()
+        private bool IsTimeToSend(DateTime dataTime)
         {
-            //var path = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).FullName).Parent.FullName;
-            //var nozzleMeasures = File.ReadLines(Path.Combine(path, NOZZLE_MEASURES_FILE_PATH)).ToArray();
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    this.nozzleMeasures.Add(NozzleMeasure.Parse(nozzleMeasures[i]));
-            //}
+            TimeSpan simulationTimeSpan = DateTime.Now - simulationTimeStart;
+            TimeSpan dataTimeSpan = dataTime - dataTimeStart;
 
-            //var tankMeasures = File.ReadAllLines(Path.Combine(path, TANK_MEASURES_FILE_PATH)).ToArray();
-            //for (int i = 0; i < 100; i++)
-            //{
-            //    this.tankMeasures.Add(TankMeasure.Parse(tankMeasures[i]));
-            //}
-
-            //var refuels = File.ReadAllLines(Path.Combine(path, REFUELS_FILE_PATH)).ToArray();
-            //for (int i = 0; i < refuels.Count() - 1; i++)
-            //{
-            //    this.refuels.Add(Refuel.Parse(refuels[i]));
-            //}
-
+            return simulationTimeSpan >= dataTimeSpan;
         }
-
-
     }
 }

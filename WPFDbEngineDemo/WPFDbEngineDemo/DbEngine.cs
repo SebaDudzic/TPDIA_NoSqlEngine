@@ -24,7 +24,7 @@ namespace NoSqlEngineConsoleApp
         public DbEngine()
         {
             _client = new MongoClient();
-            //_client.DropDatabase(DB_NAME);
+            _client.DropDatabase(DB_NAME);
             _database = _client.GetDatabase(DB_NAME);
             tankMeasuresCollection = _database.GetCollection<BsonDocument>(TANK_MEASURES_NAME);
             nozzleMeasuresCollection = _database.GetCollection<BsonDocument>(NOZZLE_MEASURES_NAME);
@@ -52,14 +52,28 @@ namespace NoSqlEngineConsoleApp
 
         public int GetTankMeasuresCount()
         {
-            Task<int> task = Task<int>.Factory.StartNew(() => ReadCollectionCount(tankMeasuresCollection).Result);
-            return task.Result;
+            try
+            {
+                Task<int> task = Task<int>.Factory.StartNew(() => ReadCollectionCount(tankMeasuresCollection).Result);
+                return task.Result;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
         }
 
         public int GetNozzleMeasureCount()
         {
-            Task<int> task = Task<int>.Factory.StartNew(() => ReadCollectionCount(nozzleMeasuresCollection).Result);
-            return task.Result;
+            try
+            {
+                Task<int> task = Task<int>.Factory.StartNew(() => ReadCollectionCount(nozzleMeasuresCollection).Result);
+                return task.Result;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
         }
 
         public TankMeasure GetLatestTankMeasure()
@@ -69,7 +83,7 @@ namespace NoSqlEngineConsoleApp
                 Task<BsonDocument> result = tankMeasuresCollection.Aggregate().SortByDescending((a) => a["date"]).FirstAsync();
                 return TankMeasure.Parse(result.Result);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
@@ -79,9 +93,9 @@ namespace NoSqlEngineConsoleApp
         {
             try
             {
-                return tankMeasuresCollection.Distinct<int>("tankID", new BsonDocument()).ToList().OrderBy(x=>x).ToList();
+                return tankMeasuresCollection.Distinct<int>("tankID", new BsonDocument()).ToList().OrderBy(x => x).ToList();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return new List<int>();
             }
@@ -92,7 +106,7 @@ namespace NoSqlEngineConsoleApp
             try
             {
                 return tankMeasuresCollection.Aggregate().SortByDescending((a) => a["date"]).Limit(amount)
-                    .ToList().Select(x=>TankMeasure.Parse(x)).ToList();
+                    .ToList().Select(x => TankMeasure.Parse(x)).ToList();
             }
             catch (Exception e)
             {
