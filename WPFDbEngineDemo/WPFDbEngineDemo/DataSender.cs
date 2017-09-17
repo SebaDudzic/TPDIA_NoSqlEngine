@@ -9,12 +9,22 @@ namespace NoSqlEngineConsoleApp
 {
     class DataSender
     {
+        private const int PRECACHED_TANK_MESUARES = 20;
+        private const int PRECACHED_NOZZLE_MESUARES = 20;
+        private const int PRECACHED_REFUEL = 20;
+        private const int REFRESH_TIME = 50;
         private const string NOZZLE_MEASURES_FILE_PATH = "nozzleMeasures.log";
         private const string TANK_MEASURES_FILE_PATH = "tankMeasures.log";
-        private const string REFUELS_FILE_PATH = "tankMeasures.log";
+        private const string REFUELS_FILE_PATH = "refuel.log";
 
         private StreamReader tankMeasuresFile;
         private List<TankMeasure> waitingTankMeasures = new List<TankMeasure>();
+
+        private StreamReader nozzleMeasuresFile;
+        private List<NozzleMeasure> waitingNozzleMeasures = new List<NozzleMeasure>();
+
+        private StreamReader refuelFile;
+        private List<Refuel> waitingRefuel = new List<Refuel>();
 
         private System.DateTime startDataTime;
         private TimeSpan simulationTime;
@@ -22,8 +32,6 @@ namespace NoSqlEngineConsoleApp
 
         //SenderConfigurationFromUI
         private Func<double> getSenderTimeScale;
-
-        private const int REFRESH_TIME = 50;
 
         public DataSender(DbEngine dbEngine, Func<double> getSenderTimeScale)
         {
@@ -38,7 +46,8 @@ namespace NoSqlEngineConsoleApp
         {
             SimulateTimer();
             RunTankMeasureSender();
-            //RunNozzleMeasureSender();
+            RunNozzleMeasureSender();
+            RunRefuelSender();
         }
 
         private async Task SimulateTimer()
@@ -46,7 +55,7 @@ namespace NoSqlEngineConsoleApp
             while (true)
             {
                 await Task.Delay(REFRESH_TIME);
-                simulationTime += new TimeSpan(0, 0, 0, 0, (int)(50 * getSenderTimeScale()));
+                simulationTime += new TimeSpan(0, 0, 0, 0, (int)(REFRESH_TIME * getSenderTimeScale()));
             }
         }
 
@@ -65,30 +74,35 @@ namespace NoSqlEngineConsoleApp
             }
         }
 
-        //private async Task RunNozzleMeasureSender()
-        //{
-        //    while (true)
-        //    {
-        //        double defaultCountPerSecond = 2;
+        private async Task RunNozzleMeasureSender()
+        {
+            while (true)
+            {
+                await Task.Delay(REFRESH_TIME);
 
-        //        if (getSenderTimeScale() != 0)
-        //        {
-        //            await Task.Delay((int)((1000 / defaultCountPerSecond) / getSenderTimeScale()));
+                while (waitingNozzleMeasures.Count > 0 && IsTimeToSend(waitingNozzleMeasures.First().date))
+                {
+                    dbEngine.AddNozzleMeasure(waitingNozzleMeasures.First());
+                    waitingNozzleMeasures.RemoveAt(0);
+                    ReadDataNozzleMeasures(1);
+                }
+            }
+        }
 
-        //            dbEngine.AddNozzleMeasure(new NozzleMeasure(System.DateTime.Now,
-        //                random.Next(0, 5),
-        //                random.Next(0, 5),
-        //                random.Next(0, 5),
-        //                (float)random.NextDouble(),
-        //                (float)random.NextDouble(),
-        //                random.Next(0, 5)));
-        //        }
-        //        else
-        //        {
-        //            await Task.Delay(100);
-        //        }
-        //    }
-        //}
+        private async Task RunRefuelSender()
+        {
+            while (true)
+            {
+                await Task.Delay(REFRESH_TIME);
+
+                while (waitingRefuel.Count > 0 && IsTimeToSend(waitingRefuel.First().date))
+                {
+                    dbEngine.AddRefuel(waitingRefuel.First());
+                    waitingRefuel.RemoveAt(0);
+                    ReadDataRefuel(1);
+                }
+            }
+        }
 
         public DateTime GetCurrentDataTime()
         {
@@ -100,7 +114,11 @@ namespace NoSqlEngineConsoleApp
             var currentDirPath = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).FullName).Parent.FullName;
 
             tankMeasuresFile = new System.IO.StreamReader(Path.Combine(currentDirPath, TANK_MEASURES_FILE_PATH));
-            ReadDataTankMeasures(20);
+            ReadDataTankMeasures(PRECACHED_TANK_MESUARES);
+            nozzleMeasuresFile = new System.IO.StreamReader(Path.Combine(currentDirPath, NOZZLE_MEASURES_FILE_PATH));
+            ReadDataNozzleMeasures(PRECACHED_NOZZLE_MESUARES);
+            refuelFile = new System.IO.StreamReader(Path.Combine(currentDirPath, REFUELS_FILE_PATH));
+            ReadDataRefuel(PRECACHED_REFUEL);
             startDataTime = waitingTankMeasures[0].date;
         }
 
@@ -108,7 +126,45 @@ namespace NoSqlEngineConsoleApp
         {
             for (int i = 0; i < amount; i++)
             {
-                waitingTankMeasures.Add(TankMeasure.Parse(tankMeasuresFile.ReadLine()));
+                if (!tankMeasuresFile.EndOfStream)
+                {
+                    waitingTankMeasures.Add(TankMeasure.Parse(tankMeasuresFile.ReadLine()));
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+
+        private void ReadDataNozzleMeasures(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                if (!nozzleMeasuresFile.EndOfStream)
+                {
+                    waitingNozzleMeasures.Add(NozzleMeasure.Parse(nozzleMeasuresFile.ReadLine()));
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+
+        private void ReadDataRefuel(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                if (!refuelFile.EndOfStream)
+                {
+                    waitingRefuel.Add(Refuel.Parse(refuelFile.ReadLine()));
+                }
+                else
+                {
+                    return;
+                }
+
             }
         }
 
