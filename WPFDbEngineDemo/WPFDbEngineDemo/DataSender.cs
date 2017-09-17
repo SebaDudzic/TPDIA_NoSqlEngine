@@ -68,6 +68,7 @@ namespace NoSqlEngineConsoleApp
                 {
                     dbEngine.AddTankMeasure(waitingTankMeasures.First());
                     waitingTankMeasures.RemoveAt(0);
+                    ReadDataTankMeasures(1);
                 }
             }
         }
