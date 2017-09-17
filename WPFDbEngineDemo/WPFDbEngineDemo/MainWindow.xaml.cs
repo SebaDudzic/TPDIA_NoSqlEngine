@@ -47,17 +47,22 @@ namespace WPFDbEngineDemo
                 tankMeasuresCount.Content = dbEngine.GetTankMeasuresCount();
                 nozzleMeasuresCount.Content = dbEngine.GetNozzleMeasureCount();
 
-                TankMeasure latestTankMeasure = dbEngine.GetLatestTankMeasure();
+                SetTankUI(1, tank1_LastRefreshLabel, tank1_FuelAmountLabel, tank1_FuelTemperatureLabel);
+                SetTankUI(2, tank2_LastRefreshLabel, tank2_FuelAmountLabel, tank2_FuelTemperatureLabel);
+                SetTankUI(3, tank3_LastRefreshLabel, tank3_FuelAmountLabel, tank3_FuelTemperatureLabel);
+                SetTankUI(4, tank4_LastRefreshLabel, tank4_FuelAmountLabel, tank4_FuelTemperatureLabel);
+            }
+        }
 
-                if (latestTankMeasure != null)
-                {
-                    tank0_LastRefresh.Content = latestTankMeasure.date;
-                    tank0_FuelAmount.Content = latestTankMeasure.fuelHeight;
-                    tank0_FuelTemperature.Content = latestTankMeasure.fuelTemperature;
-                }
+        private void SetTankUI(int tankID, Label lastRefreshLabel, Label fuelAmountLabel, Label fuelTemparatureLabel)
+        {
+            TankMeasure latestTankMeasure = dbEngine.GetLatestTankMeasure(tankID);
 
-                List<int> uniqueTankIDs = dbEngine.GetTankMeasuresUniqueIDs();
-                tankIDsLabel.Content = uniqueTankIDs.ListToString();
+            if (latestTankMeasure != null)
+            {
+                lastRefreshLabel.Content = latestTankMeasure.date;
+                fuelAmountLabel.Content = latestTankMeasure.fuelCapacity;
+                fuelTemparatureLabel.Content = latestTankMeasure.fuelTemperature;
             }
         }
 
