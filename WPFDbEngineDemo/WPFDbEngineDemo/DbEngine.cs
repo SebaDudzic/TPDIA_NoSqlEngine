@@ -35,46 +35,17 @@ namespace NoSqlEngineConsoleApp
 
         public async void AddTankMeasure(TankMeasure data)
         {
-            Console.WriteLine("AddTankMeasure");
             await tankMeasuresCollection.InsertOneAsync(TankMeasure.Parse(data));
         }
 
         public async void AddNozzleMeasure(NozzleMeasure data)
         {
-            Console.WriteLine("AddNozzleMeasure");
-
-            var document = new BsonDocument
-            {
-                { "id", Guid.NewGuid().ToString("N") },
-                { "date", data.date },
-                { "locationID", data.locationID },
-                { "fuelGun", data.fuelGun },
-                { "tankID", data.tankID },
-                { "literCounter", data.literCounter },
-                { "totalCounter", data.totalCounter },
-                { "status", data.status },
-            };
-
-            //Console.WriteLine(document);
-            await nozzleMeasuresCollection.InsertOneAsync(document);
+            await nozzleMeasuresCollection.InsertOneAsync(NozzleMeasure.Parse(data));
         }
 
         private async void AddRefuel(Refuel data)
         {
-            Console.WriteLine("AddRefuel");
-
-            var document = new BsonDocument
-            {
-                { "id", Guid.NewGuid().ToString("N") },
-                { "date", data.date },
-                { "tankID", data.tankID },
-                { "fuelCapacity", data.fuelCapacity },
-                { "tankSpeed", data.tankSpeed },
-            };
-
-            Console.WriteLine(document);
-
-            await refuelsCollection.InsertOneAsync(document);
+            await refuelsCollection.InsertOneAsync(Refuel.Parse(data));
         }
 
         //--Public_Interface_Read------------------------------------//

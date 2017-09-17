@@ -46,6 +46,7 @@ namespace WPFDbEngineDemo
                 nozzleMeasuresCount.Content = dbEngine.GetNozzleMeasureCount();
 
                 TankMeasure latestTankMeasure = dbEngine.GetLatestTankMeasure();
+
                 if (latestTankMeasure != null)
                 {
                     tank0_LastRefresh.Content = latestTankMeasure.date;

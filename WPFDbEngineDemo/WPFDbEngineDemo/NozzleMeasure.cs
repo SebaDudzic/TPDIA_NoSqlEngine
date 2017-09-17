@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace NoSqlEngineConsoleApp
 {
@@ -52,6 +53,34 @@ namespace NoSqlEngineConsoleApp
             return result;
         }
 
+        public static BsonDocument Parse(NozzleMeasure data)
+        {
+            var result = new BsonDocument()
+            {
+                { "id", Guid.NewGuid().ToString("N") },
+                { "date", data.date },
+                { "locationID", data.locationID },
+                { "fuelGun", data.fuelGun },
+                { "tankID", data.tankID },
+                { "literCounter", data.literCounter },
+                { "totalCounter", data.totalCounter },
+                { "status", data.status },
+            };
 
+            return result;
+        }
+
+        public static NozzleMeasure Parse(BsonDocument doc)
+        {
+            var result = new NozzleMeasure();
+            result.date = doc["date"].ToUniversalTime();
+            result.locationID = doc["locationID"].AsInt32;
+            result.fuelGun = doc["fuelGun"].AsInt32;
+            result.tankID = doc["tankID"].AsInt32;
+            result.literCounter = (float)doc["literCounter"].AsDouble;
+            result.totalCounter = (float)doc["totalCounter"].AsDouble;
+            result.status = doc["status"].AsInt32;
+            return result;
+        }
     }
 }

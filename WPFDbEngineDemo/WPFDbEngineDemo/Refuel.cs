@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MongoDB.Bson;
 
 namespace NoSqlEngineConsoleApp
 {
@@ -38,6 +39,30 @@ namespace NoSqlEngineConsoleApp
             result.tankID = Utilities.ParseToInt(splited[1]);
             result.fuelCapacity = Utilities.ParseToFloat(splited[2]);
             result.tankSpeed = Utilities.ParseToFloat(splited[3]);
+            return result;
+        }
+
+        public static BsonDocument Parse(Refuel data)
+        {
+            var result = new BsonDocument()
+            {
+                { "id", Guid.NewGuid().ToString("N") },
+                { "date", data.date },
+                { "tankID", data.tankID },
+                { "fuelCapacity", data.fuelCapacity },
+                { "tankSpeed", data.tankSpeed },
+            };
+
+            return result;
+        }
+
+        public static Refuel Parse(BsonDocument doc)
+        {
+            var result = new Refuel();
+            result.date = doc["date"].ToUniversalTime();
+            result.tankID = doc["tankID"].AsInt32;
+            result.fuelCapacity = (float)doc["fuelCapacity"].AsDouble;
+            result.tankSpeed = (float)doc["tankSpeed"].AsDouble;
             return result;
         }
     }

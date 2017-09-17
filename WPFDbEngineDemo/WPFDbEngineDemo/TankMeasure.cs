@@ -61,7 +61,6 @@ namespace NoSqlEngineConsoleApp
             return result;
         }
 
-
         public static BsonDocument Parse(TankMeasure data)
         {
             var result = new BsonDocument()
