@@ -47,7 +47,7 @@ namespace NoSqlEngineConsoleApp
             result.locationID = Utilities.ParseToInt(splited[1]);
             result.nozzleID = Utilities.ParseToInt(splited[2]);
             result.tankID = Utilities.ParseToInt(splited[3]);
-            result.literCounter = Utilities.ParseToInt(splited[4]);
+            result.literCounter = Utilities.ParseToFloat(splited[4]);
             result.totalCounter = Utilities.ParseToFloat(splited[5]);
             result.status = Utilities.ParseToInt(splited[6]);
             return result;
