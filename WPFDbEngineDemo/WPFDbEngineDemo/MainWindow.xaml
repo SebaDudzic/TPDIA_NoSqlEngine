@@ -5,33 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFDbEngineDemo"
         mc:Ignorable="d"
-        Title="DbEngineDemo" Height="649.8" Width="525">
+        Title="DbEngineDemo" Height="649.8" Width="682">
     <Grid>
-        <Slider x:Name="senderTimeScale" HorizontalAlignment="Left" Margin="226,22,0,0" VerticalAlignment="Top" Width="251" TickPlacement="Both" Value="1" SmallChange="1"/>
-        <GroupBox Header="TankMeasures" HorizontalAlignment="Left" Height="76" Margin="17,57,0,0" VerticalAlignment="Top" Width="461" FontWeight="Bold"/>
-        <Label x:Name="tankMeasuresCount" Content="25645" HorizontalAlignment="Left" Margin="146,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.386,0.423" Height="26"/>
-        <Label Content="TankMeasuresCount:" HorizontalAlignment="Left" Margin="27,78,0,0" VerticalAlignment="Top"/>
-        <Label Content="TimeScale:" HorizontalAlignment="Left" Margin="298,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.698,-0.192"/>
-        <GroupBox Header="NozzleMeasures" HorizontalAlignment="Left" Height="76" Margin="17,143,0,0" VerticalAlignment="Top" Width="461" FontWeight="Bold"/>
-        <Label x:Name="nozzleMeasuresCount" Content="25645" HorizontalAlignment="Left" Margin="158,164,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.386,0.423" Height="26"/>
-        <Label Content="NozzleMeasuresCount:" HorizontalAlignment="Left" Margin="27,164,0,0" VerticalAlignment="Top"/>
-        <Canvas HorizontalAlignment="Left" Height="67" Margin="19,246,0,0" VerticalAlignment="Top" Width="139" Background="#FFB9B9B9">
-            <Label Content="Tank0" FontWeight="Bold"/>
-            <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
-            <Label x:Name="tank0_LastRefresh" Content="2818" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="53"/>
-            <Label Content="FuelAmount:" Canvas.Top="30" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
-            <Label x:Name="tank0_FuelAmount" Content="2818" Canvas.Top="30" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="56"/>
-            <Label Content="FuelTemperature:" Canvas.Top="45" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
-            <Label x:Name="tank0_FuelTemperature" Content="2818" Canvas.Top="45" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="75"/>
-        </Canvas>
-        <Label Content="AvailavbleTanks:" HorizontalAlignment="Left" Margin="19,219,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.237,-0.115"/>
-        <Label x:Name="tankIDsLabel" Content="1;2;5;" HorizontalAlignment="Left" Margin="108,220,0,0" VerticalAlignment="Top" Width="364"/>
+        <Label Content="CurrentSimulationTime:" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="currentSimulationTimeLabel" Content="Label" HorizontalAlignment="Left" Margin="19,26,0,0" VerticalAlignment="Top" Width="127"/>
+        <Label x:Name="timeScaleLabel" Content="0.4" HorizontalAlignment="Left" Margin="458,0,0,0" VerticalAlignment="Top" Width="108"/>
+        <Slider x:Name="senderTimeScale" HorizontalAlignment="Left" Margin="263,22,0,0" VerticalAlignment="Top" Width="379" TickPlacement="Both" Value="1" SmallChange="1"/>
+        <Label Content="TimeScale:" HorizontalAlignment="Left" Margin="392,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.698,-0.192"/>
+
+        <GroupBox Header="TankMeasures" HorizontalAlignment="Left" Height="58" Margin="17,57,0,0" VerticalAlignment="Top" Width="205" FontWeight="Bold">
+            <Label x:Name="tankMeasuresCount" Content="-" HorizontalAlignment="Left" Margin="4,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.386,0.423" Height="26" Width="144"/>
+        </GroupBox>
+        <GroupBox Header="NozzleMeasures" HorizontalAlignment="Left" Height="58" Margin="238,57,0,0" VerticalAlignment="Top" Width="205" FontWeight="Bold">
+            <Label x:Name="nozzleMeasuresCount" Content="-" HorizontalAlignment="Left" Margin="4,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.386,0.423" Height="26" Width="144"/>
+        </GroupBox>
+        <GroupBox Header="Refuels" HorizontalAlignment="Left" Height="58" Margin="458,57,0,0" VerticalAlignment="Top" Width="205" FontWeight="Bold">
+            <Label x:Name="refuelsCount" Content="-" HorizontalAlignment="Left" Margin="4,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.386,0.423" Height="26" Width="144"/>
+        </GroupBox>
+
+        <GroupBox Header="Tanks" HorizontalAlignment="Left" Height="99" Margin="17,120,0,0" VerticalAlignment="Top" Width="647" FontWeight="Bold">
+            <Grid>
+                <Canvas HorizontalAlignment="Left" Height="67" Margin="6,5,0,0" VerticalAlignment="Top" Width="152" Background="#FFB9B9B9">
+                    <Label Content="Tank1" FontWeight="Bold"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="tank1_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="53"/>
+                    <Label Content="FuelAmount:" Canvas.Top="30" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="tank1_FuelAmountLabel" Content="-" Canvas.Top="30" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="56"/>
+                    <Label Content="FuelTemperature:" Canvas.Top="45" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="tank1_FuelTemperatureLabel" Content="-" Canvas.Top="45" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="75"/>
+                </Canvas>
+                <Canvas HorizontalAlignment="Left" Height="67" Margin="163,5,0,0" VerticalAlignment="Top" Width="152" Background="#FFB9B9B9">
+                    <Label Content="Tank2" FontWeight="Bold"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="tank2_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="53"/>
+                    <Label Content="FuelAmount:" Canvas.Top="30" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="tank2_FuelAmountLabel" Content="-" Canvas.Top="30" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="56"/>
+                    <Label Content="FuelTemperature:" Canvas.Top="45" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="tank2_FuelTemperatureLabel" Content="-" Canvas.Top="45" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="75"/>
+                </Canvas>
+
+                <Canvas HorizontalAlignment="Left" Height="67" Margin="320,5,0,0" VerticalAlignment="Top" Width="152" Background="#FFB9B9B9">
+                    <Label Content="Tank3" FontWeight="Bold"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="tank3_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="53"/>
+                    <Label Content="FuelAmount:" Canvas.Top="30" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="tank3_FuelAmountLabel" Content="-" Canvas.Top="30" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="56"/>
+                    <Label Content="FuelTemperature:" Canvas.Top="45" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="tank3_FuelTemperatureLabel" Content="-" Canvas.Top="45" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="75"/>
+                </Canvas>
+
+                <Canvas HorizontalAlignment="Left" Height="67" Margin="477,5,0,0" VerticalAlignment="Top" Width="152" Background="#FFB9B9B9">
+                    <Label Content="Tank4" FontWeight="Bold"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="tank4_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="53"/>
+                    <Label Content="FuelAmount:" Canvas.Top="30" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="tank4_FuelAmountLabel" Content="-" Canvas.Top="30" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="56"/>
+                    <Label Content="FuelTemperature:" Canvas.Top="45" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="tank4_FuelTemperatureLabel" Content="-" Canvas.Top="45" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="75"/>
+                </Canvas>
+            </Grid>
+        </GroupBox>
+
         <Button Content="TestReadLastXTankMeasures" HorizontalAlignment="Left" Margin="19,561,0,0" VerticalAlignment="Top" Width="184" Height="36" Click="TestReadLastTankMeasuresAmount"/>
         <TextBox x:Name="TestReadLastTankMeasuresAmountTextBox" HorizontalAlignment="Left" Height="23" Margin="113,533,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="87"/>
         <Label Content="AmountToRead:" HorizontalAlignment="Left" Margin="19,530,0,0" VerticalAlignment="Top"/>
-        <Label Content="CurrentSimulationTime:" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <Label x:Name="currentSimulationTimeLabel" Content="Label" HorizontalAlignment="Left" Margin="19,26,0,0" VerticalAlignment="Top" Width="127"/>
-        <Label x:Name="timeScaleLabel" Content="0.4" HorizontalAlignment="Left" Margin="364,0,0,0" VerticalAlignment="Top" Width="108"/>
 
     </Grid>
 </Window>

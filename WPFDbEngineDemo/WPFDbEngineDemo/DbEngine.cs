@@ -43,7 +43,7 @@ namespace NoSqlEngineConsoleApp
             await nozzleMeasuresCollection.InsertOneAsync(NozzleMeasure.Parse(data));
         }
 
-        private async void AddRefuel(Refuel data)
+        public async void AddRefuel(Refuel data)
         {
             await refuelsCollection.InsertOneAsync(Refuel.Parse(data));
         }
@@ -76,11 +76,15 @@ namespace NoSqlEngineConsoleApp
             }
         }
 
-        public TankMeasure GetLatestTankMeasure()
+        public TankMeasure GetLatestTankMeasure(int tankID)
         {
             try
             {
-                Task<BsonDocument> result = tankMeasuresCollection.Aggregate().SortByDescending((a) => a["date"]).FirstAsync();
+                BsonDocument filter = new BsonDocument()
+                {
+                    { "tankID", tankID }
+                };
+                Task<BsonDocument> result = tankMeasuresCollection.Find(filter).SortByDescending((a) => a["date"]).FirstAsync();
                 return TankMeasure.Parse(result.Result);
             }
             catch (Exception e)
@@ -89,17 +93,17 @@ namespace NoSqlEngineConsoleApp
             }
         }
 
-        public List<int> GetTankMeasuresUniqueIDs()
-        {
-            try
-            {
-                return tankMeasuresCollection.Distinct<int>("tankID", new BsonDocument()).ToList().OrderBy(x => x).ToList();
-            }
-            catch (Exception e)
-            {
-                return new List<int>();
-            }
-        }
+        //public List<int> GetTankMeasuresUniqueIDs()
+        //{
+        //    try
+        //    {
+        //        return tankMeasuresCollection.Distinct<int>("tankID", new BsonDocument()).ToList().OrderBy(x => x).ToList();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return new List<int>();
+        //    }
+        //}
 
         public List<TankMeasure> GetLatestTankMeasures(int amount)
         {
