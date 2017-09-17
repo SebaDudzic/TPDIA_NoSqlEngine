@@ -53,9 +53,34 @@ namespace WPFDbEngineDemo
                 SetTankUI(2, tank2_LastRefreshLabel, tank2_FuelAmountLabel, tank2_FuelTemperatureLabel);
                 SetTankUI(3, tank3_LastRefreshLabel, tank3_FuelAmountLabel, tank3_FuelTemperatureLabel);
                 SetTankUI(4, tank4_LastRefreshLabel, tank4_FuelAmountLabel, tank4_FuelTemperatureLabel);
+
+                SetNozzleUI(13, nozzle13_LastRefreshLabel, nozzle13_tankIDLabel, nozzle13_LiterCounterLabel, 
+                    nozzle13_TotalLiterCounterLabel, nozzle13_StatusLabel, nozzle13bg);
+                SetNozzleUI(14, nozzle14_LastRefreshLabel, nozzle14_tankIDLabel, nozzle14_LiterCounterLabel,
+                    nozzle14_TotalLiterCounterLabel, nozzle14_StatusLabel, nozzle14bg);
+                SetNozzleUI(15, nozzle15_LastRefreshLabel, nozzle15_tankIDLabel, nozzle15_LiterCounterLabel,
+                    nozzle15_TotalLiterCounterLabel, nozzle15_StatusLabel, nozzle15bg);
+                SetNozzleUI(16, nozzle16_LastRefreshLabel, nozzle16_tankIDLabel, nozzle16_LiterCounterLabel,
+                    nozzle16_TotalLiterCounterLabel, nozzle16_StatusLabel, nozzle16bg);
+                SetNozzleUI(17, nozzle17_LastRefreshLabel, nozzle17_tankIDLabel, nozzle17_LiterCounterLabel,
+                    nozzle17_TotalLiterCounterLabel, nozzle17_StatusLabel, nozzle17bg);
+                SetNozzleUI(18, nozzle18_LastRefreshLabel, nozzle18_tankIDLabel, nozzle18_LiterCounterLabel,
+                    nozzle18_TotalLiterCounterLabel, nozzle18_StatusLabel, nozzle18bg);
+                SetNozzleUI(19, nozzle19_LastRefreshLabel, nozzle19_tankIDLabel, nozzle19_LiterCounterLabel,
+                    nozzle19_TotalLiterCounterLabel, nozzle19_StatusLabel, nozzle19bg);
+                SetNozzleUI(20, nozzle20_LastRefreshLabel, nozzle20_tankIDLabel, nozzle20_LiterCounterLabel,
+                    nozzle20_TotalLiterCounterLabel, nozzle20_StatusLabel, nozzle20bg);
+                SetNozzleUI(21, nozzle21_LastRefreshLabel, nozzle21_tankIDLabel, nozzle21_LiterCounterLabel,
+                    nozzle21_TotalLiterCounterLabel, nozzle21_StatusLabel, nozzle21bg);
+                SetNozzleUI(22, nozzle22_LastRefreshLabel, nozzle22_tankIDLabel, nozzle22_LiterCounterLabel,
+                    nozzle22_TotalLiterCounterLabel, nozzle22_StatusLabel, nozzle22bg);
+                SetNozzleUI(23, nozzle23_LastRefreshLabel, nozzle23_tankIDLabel, nozzle23_LiterCounterLabel,
+                    nozzle23_TotalLiterCounterLabel, nozzle23_StatusLabel, nozzle23bg);
+                SetNozzleUI(24, nozzle24_LastRefreshLabel, nozzle24_tankIDLabel, nozzle24_LiterCounterLabel,
+                    nozzle24_TotalLiterCounterLabel, nozzle24_StatusLabel, nozzle24bg);
             }
         }
-
+     
         private void SetTankUI(int tankID, Label lastRefreshLabel, Label fuelAmountLabel, Label fuelTemparatureLabel)
         {
             TankMeasure latestTankMeasure = dbEngine.GetLatestTankMeasure(tankID);
@@ -63,8 +88,25 @@ namespace WPFDbEngineDemo
             if (latestTankMeasure != null)
             {
                 lastRefreshLabel.Content = latestTankMeasure.date;
-                fuelAmountLabel.Content = latestTankMeasure.fuelCapacity;
+                fuelAmountLabel.Content = string.Format("{0:0.00}", latestTankMeasure.fuelCapacity);
                 fuelTemparatureLabel.Content = latestTankMeasure.fuelTemperature;
+            }
+        }
+
+        private void SetNozzleUI(int nozzleID, Label lastRefreshLabel, Label tankIDLabel, Label literCounterLabel,
+            Label totalLiterCounterLabel, Label statusLabel, Canvas background)
+        {
+            NozzleMeasure latestNozzleMeasure = dbEngine.GetLatestNozzleMeasure(nozzleID);
+
+            if (latestNozzleMeasure != null)
+            {
+                lastRefreshLabel.Content = latestNozzleMeasure.date;
+                tankIDLabel.Content = latestNozzleMeasure.tankID;
+                literCounterLabel.Content = string.Format("{0:0.00}",latestNozzleMeasure.literCounter);
+                totalLiterCounterLabel.Content = string.Format("{0:0.00}", latestNozzleMeasure.totalCounter);
+                statusLabel.Content = latestNozzleMeasure.status == 1 ? "idle" : "using";
+                background.Background = latestNozzleMeasure.status == 1 ? 
+                    new SolidColorBrush(Color.FromRgb(100,170,110)) : new SolidColorBrush(Color.FromRgb(230, 150, 70));
             }
         }
 
