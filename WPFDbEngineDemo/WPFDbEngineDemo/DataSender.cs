@@ -11,7 +11,7 @@ namespace NoSqlEngineConsoleApp
     class DataSender
     {
         private const int PRECACHED_TANK_MESUARES = 20;
-        private const int PRECACHED_NOZZLE_MESUARES = 20;
+        private const int PRECACHED_NOZZLE_MESUARES = 2000;
         private const int PRECACHED_REFUEL = 20;
         private const int REFRESH_TIME = 1000;
         private const string NOZZLE_MEASURES_FILE_PATH = "nozzleMeasures.log";
@@ -130,7 +130,7 @@ namespace NoSqlEngineConsoleApp
             ReadDataNozzleMeasures(PRECACHED_NOZZLE_MESUARES);
             refuelFile = new System.IO.StreamReader(Path.Combine(currentDirPath, REFUELS_FILE_PATH));
             ReadDataRefuel(PRECACHED_REFUEL);
-            startDataTime = waitingTankMeasures[0].date;
+            startDataTime = new DateTime(2014, 01, 01, 0, 0, 0);
         }
 
         private void ReadDataTankMeasures(int amount)

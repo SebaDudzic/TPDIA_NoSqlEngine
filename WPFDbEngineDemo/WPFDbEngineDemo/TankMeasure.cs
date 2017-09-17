@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MongoDB.Bson;
+using System.Diagnostics;
 
 namespace NoSqlEngineConsoleApp
 {
@@ -66,7 +67,7 @@ namespace NoSqlEngineConsoleApp
             var result = new BsonDocument()
             {
                 { "id", Guid.NewGuid().ToString("N") },
-                { "date", data.date },
+                { "date", data.date.ToString() },
                 { "locationID", data.locationID },
                 { "meterID", data.meterID },
                 { "tankID", data.tankID },
@@ -83,7 +84,7 @@ namespace NoSqlEngineConsoleApp
         public static TankMeasure Parse(BsonDocument doc)
         {
             var result = new TankMeasure();
-            result.date = doc["date"].ToUniversalTime();
+            result.date = DateTime.Parse(doc["date"].AsString);
             result.locationID = doc["locationID"].AsInt32;
             result.meterID = doc["meterID"].AsInt32;
             result.tankID = doc["tankID"].AsInt32;
