@@ -106,6 +106,23 @@ namespace NoSqlEngineConsoleApp
             }
         }
 
+        public NozzleMeasure GetLatestNozzleMeasure(int nozzleID)
+        {
+            try
+            {
+                BsonDocument filter = new BsonDocument()
+                {
+                    { "nozzleID", nozzleID }
+                };
+                Task<BsonDocument> result = nozzleMeasuresCollection.Find(filter).SortByDescending((a) => a["date"]).FirstAsync();
+                return NozzleMeasure.Parse(result.Result);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
         //public List<int> GetTankMeasuresUniqueIDs()
         //{
         //    try

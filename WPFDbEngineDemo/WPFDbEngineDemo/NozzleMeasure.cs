@@ -11,7 +11,7 @@ namespace NoSqlEngineConsoleApp
     {
         public DateTime date;
         public int locationID;
-        public int fuelGun;
+        public int nozzleID;
         public int tankID;
         public float literCounter;
         public float totalCounter;
@@ -24,7 +24,7 @@ namespace NoSqlEngineConsoleApp
 
         public NozzleMeasure(DateTime date,
                          int locationID,
-                         int fuelGun,
+                         int nozzleID,
                          int tankID,
                          float literCounter,
                          float totalCounter,
@@ -32,7 +32,7 @@ namespace NoSqlEngineConsoleApp
         {
             this.date = date;
             this.locationID = locationID;
-            this.fuelGun = fuelGun;
+            this.nozzleID = nozzleID;
             this.tankID = tankID;
             this.literCounter = literCounter;
             this.totalCounter = totalCounter;
@@ -45,7 +45,7 @@ namespace NoSqlEngineConsoleApp
             var result = new NozzleMeasure();
             result.date = DateTime.Parse(splited[0]);
             result.locationID = Utilities.ParseToInt(splited[1]);
-            result.fuelGun = Utilities.ParseToInt(splited[2]);
+            result.nozzleID = Utilities.ParseToInt(splited[2]);
             result.tankID = Utilities.ParseToInt(splited[3]);
             result.literCounter = Utilities.ParseToInt(splited[4]);
             result.totalCounter = Utilities.ParseToFloat(splited[5]);
@@ -60,7 +60,7 @@ namespace NoSqlEngineConsoleApp
                 { "id", Guid.NewGuid().ToString("N") },
                 { "date", data.date },
                 { "locationID", data.locationID },
-                { "fuelGun", data.fuelGun },
+                { "nozzleID", data.nozzleID },
                 { "tankID", data.tankID },
                 { "literCounter", data.literCounter },
                 { "totalCounter", data.totalCounter },
@@ -75,7 +75,7 @@ namespace NoSqlEngineConsoleApp
             var result = new NozzleMeasure();
             result.date = doc["date"].ToUniversalTime();
             result.locationID = doc["locationID"].AsInt32;
-            result.fuelGun = doc["fuelGun"].AsInt32;
+            result.nozzleID = doc["nozzleID"].AsInt32;
             result.tankID = doc["tankID"].AsInt32;
             result.literCounter = (float)doc["literCounter"].AsDouble;
             result.totalCounter = (float)doc["totalCounter"].AsDouble;

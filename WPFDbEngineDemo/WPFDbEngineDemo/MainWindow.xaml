@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFDbEngineDemo"
         mc:Ignorable="d"
-        Title="DbEngineDemo" Height="649.8" Width="682">
+        Title="DbEngineDemo" Height="700.8" Width="682">
     <Grid>
         <Label Content="CurrentSimulationTime:" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label x:Name="currentSimulationTimeLabel" Content="Label" HorizontalAlignment="Left" Margin="19,26,0,0" VerticalAlignment="Top" Width="127"/>
@@ -66,9 +66,169 @@
             </Grid>
         </GroupBox>
 
-        <Button Content="TestReadLastXTankMeasures" HorizontalAlignment="Left" Margin="19,561,0,0" VerticalAlignment="Top" Width="184" Height="36" Click="TestReadLastTankMeasuresAmount"/>
-        <TextBox x:Name="TestReadLastTankMeasuresAmountTextBox" HorizontalAlignment="Left" Height="23" Margin="113,533,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="87"/>
-        <Label Content="AmountToRead:" HorizontalAlignment="Left" Margin="19,530,0,0" VerticalAlignment="Top"/>
+        <Button Content="TestReadLastXTankMeasures" HorizontalAlignment="Left" Margin="13,620,0,0" VerticalAlignment="Top" Width="184" Height="36" Click="TestReadLastTankMeasuresAmount"/>
+        <TextBox x:Name="TestReadLastTankMeasuresAmountTextBox" HorizontalAlignment="Left" Height="22" Margin="107,592,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="87"/>
+        <Label Content="AmountToRead:" HorizontalAlignment="Left" Margin="13,588,0,0" VerticalAlignment="Top"/>
+        <GroupBox Header="Nozzles" HorizontalAlignment="Left" Height="320" Margin="19,224,0,0" VerticalAlignment="Top" Width="644" FontWeight="Bold">
+            <Grid>
+                <Canvas x:Name="nozzle13bg" HorizontalAlignment="Left" Height="92" Margin="6,5,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
+                    <Label Content="Nozzle13" FontWeight="Bold" Canvas.Top="-1"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle13_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="55"/>
+                    <Label Content="Tank:" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle13_tankIDLabel" Content="-" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="31"/>
+                    <Label Content="LiterCounter:" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle13_LiterCounterLabel" Content="-" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="68"/>
+                    <Label Content="TotalLiterCounter:" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle13_TotalLiterCounterLabel" Content="-" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="87"/>
+                    <Label Content="Status:" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle13_StatusLabel" Content="-" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="37"/>
+                </Canvas>
+                <Canvas x:Name="nozzle14bg" HorizontalAlignment="Left" Height="92" Margin="161,5,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
+                    <Label Content="Nozzle14" FontWeight="Bold" Canvas.Top="-1"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle14_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="55"/>
+                    <Label Content="Tank:" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle14_tankIDLabel" Content="-" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="31"/>
+                    <Label Content="LiterCounter:" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle14_LiterCounterLabel" Content="-" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="68"/>
+                    <Label Content="TotalLiterCounter:" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle14_TotalLiterCounterLabel" Content="-" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="87"/>
+                    <Label Content="Status:" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle14_StatusLabel" Content="-" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="37"/>
+                </Canvas>
+                <Canvas x:Name="nozzle15bg" HorizontalAlignment="Left" Height="92" Margin="316,5,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
+                    <Label Content="Nozzle15" FontWeight="Bold" Canvas.Top="-1"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle15_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="55"/>
+                    <Label Content="Tank:" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle15_tankIDLabel" Content="-" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="31"/>
+                    <Label Content="LiterCounter:" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle15_LiterCounterLabel" Content="-" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="68"/>
+                    <Label Content="TotalLiterCounter:" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle15_TotalLiterCounterLabel" Content="-" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="87"/>
+                    <Label Content="Status:" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle15_StatusLabel" Content="-" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="37"/>
+                </Canvas>
+                <Canvas x:Name="nozzle16bg" HorizontalAlignment="Left" Height="92" Margin="472,5,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
+                    <Label Content="Nozzle16" FontWeight="Bold" Canvas.Top="-1"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle16_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="55"/>
+                    <Label Content="Tank:" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle16_tankIDLabel" Content="-" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="31"/>
+                    <Label Content="LiterCounter:" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle16_LiterCounterLabel" Content="-" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="68"/>
+                    <Label Content="TotalLiterCounter:" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle16_TotalLiterCounterLabel" Content="-" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="87"/>
+                    <Label Content="Status:" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle16_StatusLabel" Content="-" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="37"/>
+                </Canvas>
+                <Canvas x:Name="nozzle17bg" HorizontalAlignment="Left" Height="92" Margin="6,102,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
+                    <Label Content="Nozzle17" FontWeight="Bold" Canvas.Top="-1"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle17_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="55"/>
+                    <Label Content="Tank:" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle17_tankIDLabel" Content="-" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="31"/>
+                    <Label Content="LiterCounter:" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle17_LiterCounterLabel" Content="-" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="68"/>
+                    <Label Content="TotalLiterCounter:" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle17_TotalLiterCounterLabel" Content="-" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="87"/>
+                    <Label Content="Status:" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle17_StatusLabel" Content="-" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="37"/>
+                </Canvas>
+                <Canvas x:Name="nozzle18bg" HorizontalAlignment="Left" Height="92" Margin="161,102,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
+                    <Label Content="Nozzle18" FontWeight="Bold" Canvas.Top="-1"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle18_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="55"/>
+                    <Label Content="Tank:" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle18_tankIDLabel" Content="-" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="31"/>
+                    <Label Content="LiterCounter:" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle18_LiterCounterLabel" Content="-" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="68"/>
+                    <Label Content="TotalLiterCounter:" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle18_TotalLiterCounterLabel" Content="-" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="87"/>
+                    <Label Content="Status:" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle18_StatusLabel" Content="-" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="37"/>
+                </Canvas>
+                <Canvas x:Name="nozzle19bg" HorizontalAlignment="Left" Height="92" Margin="316,102,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
+                    <Label Content="Nozzle19" FontWeight="Bold" Canvas.Top="-1"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle19_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="55"/>
+                    <Label Content="Tank:" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle19_tankIDLabel" Content="-" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="31"/>
+                    <Label Content="LiterCounter:" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle19_LiterCounterLabel" Content="-" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="68"/>
+                    <Label Content="TotalLiterCounter:" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle19_TotalLiterCounterLabel" Content="-" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="87"/>
+                    <Label Content="Status:" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle19_StatusLabel" Content="-" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="37"/>
+                </Canvas>
+                <Canvas x:Name="nozzle20bg" HorizontalAlignment="Left" Height="92" Margin="471,102,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
+                    <Label Content="Nozzle20" FontWeight="Bold" Canvas.Top="-1"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle20_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="55"/>
+                    <Label Content="Tank:" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle20_tankIDLabel" Content="-" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="31"/>
+                    <Label Content="LiterCounter:" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle20_LiterCounterLabel" Content="-" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="68"/>
+                    <Label Content="TotalLiterCounter:" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle20_TotalLiterCounterLabel" Content="-" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="87"/>
+                    <Label Content="Status:" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle20_StatusLabel" Content="-" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="37"/>
+                </Canvas>
+                <Canvas x:Name="nozzle21bg" HorizontalAlignment="Left" Height="92" Margin="6,199,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
+                    <Label Content="Nozzle21" FontWeight="Bold" Canvas.Top="-1"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle21_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="55"/>
+                    <Label Content="Tank:" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle21_tankIDLabel" Content="-" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="31"/>
+                    <Label Content="LiterCounter:" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle21_LiterCounterLabel" Content="-" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="68"/>
+                    <Label Content="TotalLiterCounter:" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle21_TotalLiterCounterLabel" Content="-" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="87"/>
+                    <Label Content="Status:" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle21_StatusLabel" Content="-" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="37"/>
+                </Canvas>
+                <Canvas x:Name="nozzle22bg" HorizontalAlignment="Left" Height="92" Margin="161,200,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
+                    <Label Content="Nozzle22" FontWeight="Bold" Canvas.Top="-1"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle22_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="55"/>
+                    <Label Content="Tank:" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle22_tankIDLabel" Content="-" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="31"/>
+                    <Label Content="LiterCounter:" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle22_LiterCounterLabel" Content="-" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="68"/>
+                    <Label Content="TotalLiterCounter:" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle22_TotalLiterCounterLabel" Content="-" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="87"/>
+                    <Label Content="Status:" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle22_StatusLabel" Content="-" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="37"/>
+                </Canvas>
+                <Canvas x:Name="nozzle23bg" HorizontalAlignment="Left" Height="92" Margin="316,199,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
+                    <Label Content="Nozzle23" FontWeight="Bold" Canvas.Top="-1"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle23_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="55"/>
+                    <Label Content="Tank:" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle23_tankIDLabel" Content="-" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="31"/>
+                    <Label Content="LiterCounter:" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle23_LiterCounterLabel" Content="-" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="68"/>
+                    <Label Content="TotalLiterCounter:" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle23_TotalLiterCounterLabel" Content="-" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="87"/>
+                    <Label Content="Status:" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle23_StatusLabel" Content="-" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="37"/>
+                </Canvas>
+                <Canvas x:Name="nozzle24bg" HorizontalAlignment="Left" Height="92" Margin="472,200,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
+                    <Label Content="Nozzle24" FontWeight="Bold" Canvas.Top="-1"/>
+                    <Label Content="LastRefresh:" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle24_LastRefreshLabel" Content="-" Canvas.Top="17" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="55"/>
+                    <Label Content="Tank:" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle24_tankIDLabel" Content="-" Canvas.Top="29" RenderTransformOrigin="0.289,-0.013" Height="24" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="31"/>
+                    <Label Content="LiterCounter:" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle24_LiterCounterLabel" Content="-" Canvas.Top="41" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="68"/>
+                    <Label Content="TotalLiterCounter:" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle24_TotalLiterCounterLabel" Content="-" Canvas.Top="54" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="87"/>
+                    <Label Content="Status:" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="2"/>
+                    <Label x:Name="nozzle24_StatusLabel" Content="-" Canvas.Top="66" RenderTransformOrigin="0.289,-0.013" Height="23" HorizontalAlignment="Left" VerticalContentAlignment="Stretch" FontSize="9" Canvas.Left="37"/>
+                </Canvas>
+            </Grid>
+        </GroupBox>
 
     </Grid>
 </Window>
