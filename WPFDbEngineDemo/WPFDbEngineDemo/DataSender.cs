@@ -16,8 +16,8 @@ namespace NoSqlEngineConsoleApp
         private StreamReader tankMeasuresFile;
         private List<TankMeasure> waitingTankMeasures = new List<TankMeasure>();
 
-        private System.DateTime simulationTimeStart;
-        private System.DateTime dataTimeStart;
+        private System.DateTime startDataTime;
+        private TimeSpan simulationTime;
 
         //private List<NozzleMeasure> nozzleMeasures = new List<NozzleMeasure>();
         //private List<TankMeasure> tankMeasures = new List<TankMeasure>();
@@ -35,15 +35,25 @@ namespace NoSqlEngineConsoleApp
             this.dbEngine = dbEngine;
             this.getSenderTimeScale = getSenderTimeScale;
             random = new System.Random();
-            simulationTimeStart = System.DateTime.Now;
+            simulationTime = new TimeSpan();
             OpenFilesStreams();
             RunAllSenders();
         }
 
         private void RunAllSenders()
         {
+            SimulateTimer();
             RunTankMeasureSender();
             //RunNozzleMeasureSender();
+        }
+
+        private async Task SimulateTimer()
+        {
+            while (true)
+            {
+                await Task.Delay(50);
+                simulationTime += new TimeSpan(0, 0, 0, 0, (int)(50 * getSenderTimeScale()));
+            }
         }
 
         private async Task RunTankMeasureSender()
@@ -53,8 +63,8 @@ namespace NoSqlEngineConsoleApp
                 //double defaultCountPerSecond = 1;
 
                 await Task.Delay(10);
-                
-                while(waitingTankMeasures.Count > 0 && IsTimeToSend(waitingTankMeasures.First().date))
+
+                while (waitingTankMeasures.Count > 0 && IsTimeToSend(waitingTankMeasures.First().date))
                 {
                     dbEngine.AddTankMeasure(waitingTankMeasures.First());
                     waitingTankMeasures.RemoveAt(0);
@@ -87,13 +97,18 @@ namespace NoSqlEngineConsoleApp
         //    }
         //}
 
+        public DateTime GetCurrentDataTime()
+        {
+            return startDataTime + simulationTime;
+        }
+
         private void OpenFilesStreams()
         {
             var currentDirPath = Directory.GetParent(Directory.GetParent(Environment.CurrentDirectory).FullName).Parent.FullName;
 
             tankMeasuresFile = new System.IO.StreamReader(Path.Combine(currentDirPath, TANK_MEASURES_FILE_PATH));
             ReadDataTankMeasures(20);
-            dataTimeStart = waitingTankMeasures[0].date;
+            startDataTime = waitingTankMeasures[0].date;
         }
 
         private void ReadDataTankMeasures(int amount)
@@ -106,10 +121,9 @@ namespace NoSqlEngineConsoleApp
 
         private bool IsTimeToSend(DateTime dataTime)
         {
-            TimeSpan simulationTimeSpan = DateTime.Now - simulationTimeStart;
-            TimeSpan dataTimeSpan = dataTime - dataTimeStart;
+            TimeSpan dataTimeSpan = dataTime - startDataTime;
 
-            return simulationTimeSpan >= dataTimeSpan;
+            return simulationTime >= dataTimeSpan;
         }
     }
 }

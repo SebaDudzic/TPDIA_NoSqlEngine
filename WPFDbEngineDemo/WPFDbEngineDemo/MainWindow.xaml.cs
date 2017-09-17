@@ -42,6 +42,8 @@ namespace WPFDbEngineDemo
             while (true)
             {
                 await Task.Delay(100);
+                timeScaleLabel.Content = string.Format("{0:0.00}", GetSenderTimeScale());
+                currentSimulationTimeLabel.Content = dataSender.GetCurrentDataTime().ToString();
                 tankMeasuresCount.Content = dbEngine.GetTankMeasuresCount();
                 //nozzleMeasuresCount.Content = dbEngine.GetNozzleMeasureCount();
 
@@ -61,7 +63,16 @@ namespace WPFDbEngineDemo
 
         private double GetSenderTimeScale()
         {
-            return senderTimeScale.Value;
+            double value = senderTimeScale.Value;
+
+            if (value <= 1)
+            {
+                return value;
+            }
+            else
+            {
+                return Math.Pow(10, value - 1);
+            }
         }
 
         private void TestReadLastTankMeasuresAmount(object sender, RoutedEventArgs e)

@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="DbEngineDemo" Height="649.8" Width="525">
     <Grid>
-        <Slider x:Name="senderTimeScale" HorizontalAlignment="Left" Margin="85,16,0,0" VerticalAlignment="Top" Width="251" TickPlacement="Both" Value="1"/>
+        <Slider x:Name="senderTimeScale" HorizontalAlignment="Left" Margin="226,22,0,0" VerticalAlignment="Top" Width="251" TickPlacement="Both" Value="1" SmallChange="1"/>
         <GroupBox Header="TankMeasures" HorizontalAlignment="Left" Height="76" Margin="17,57,0,0" VerticalAlignment="Top" Width="461" FontWeight="Bold"/>
         <Label x:Name="tankMeasuresCount" Content="25645" HorizontalAlignment="Left" Margin="146,78,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.386,0.423" Height="26"/>
         <Label Content="TankMeasuresCount:" HorizontalAlignment="Left" Margin="27,78,0,0" VerticalAlignment="Top"/>
-        <Label Content="TimeScale" HorizontalAlignment="Left" Margin="17,20,0,0" VerticalAlignment="Top"/>
+        <Label Content="TimeScale:" HorizontalAlignment="Left" Margin="298,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.698,-0.192"/>
         <GroupBox Header="NozzleMeasures" HorizontalAlignment="Left" Height="76" Margin="17,143,0,0" VerticalAlignment="Top" Width="461" FontWeight="Bold"/>
         <Label x:Name="nozzleMeasuresCount" Content="25645" HorizontalAlignment="Left" Margin="158,164,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.386,0.423" Height="26"/>
         <Label Content="NozzleMeasuresCount:" HorizontalAlignment="Left" Margin="27,164,0,0" VerticalAlignment="Top"/>
@@ -29,6 +29,9 @@
         <Button Content="TestReadLastXTankMeasures" HorizontalAlignment="Left" Margin="19,561,0,0" VerticalAlignment="Top" Width="184" Height="36" Click="TestReadLastTankMeasuresAmount"/>
         <TextBox x:Name="TestReadLastTankMeasuresAmountTextBox" HorizontalAlignment="Left" Height="23" Margin="113,533,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="87"/>
         <Label Content="AmountToRead:" HorizontalAlignment="Left" Margin="19,530,0,0" VerticalAlignment="Top"/>
+        <Label Content="CurrentSimulationTime:" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="currentSimulationTimeLabel" Content="Label" HorizontalAlignment="Left" Margin="19,26,0,0" VerticalAlignment="Top" Width="127"/>
+        <Label x:Name="timeScaleLabel" Content="0.4" HorizontalAlignment="Left" Margin="364,0,0,0" VerticalAlignment="Top" Width="108"/>
 
     </Grid>
 </Window>
