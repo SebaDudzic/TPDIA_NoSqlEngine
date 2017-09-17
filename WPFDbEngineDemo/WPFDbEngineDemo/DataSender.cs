@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace NoSqlEngineConsoleApp
         private const int PRECACHED_TANK_MESUARES = 20;
         private const int PRECACHED_NOZZLE_MESUARES = 20;
         private const int PRECACHED_REFUEL = 20;
-        private const int REFRESH_TIME = 50;
+        private const int REFRESH_TIME = 1000;
         private const string NOZZLE_MEASURES_FILE_PATH = "nozzleMeasures.log";
         private const string TANK_MEASURES_FILE_PATH = "tankMeasures.log";
         private const string REFUELS_FILE_PATH = "refuel.log";
@@ -69,7 +70,10 @@ namespace NoSqlEngineConsoleApp
                 {
                     dbEngine.AddTankMeasure(waitingTankMeasures.First());
                     waitingTankMeasures.RemoveAt(0);
-                    ReadDataTankMeasures(1);
+                    if (waitingTankMeasures.Count == 0)
+                    {
+                        ReadDataTankMeasures(1);
+                    }
                 }
             }
         }
@@ -84,8 +88,12 @@ namespace NoSqlEngineConsoleApp
                 {
                     dbEngine.AddNozzleMeasure(waitingNozzleMeasures.First());
                     waitingNozzleMeasures.RemoveAt(0);
-                    ReadDataNozzleMeasures(1);
+                    if (waitingNozzleMeasures.Count == 0)
+                    {
+                        ReadDataNozzleMeasures(1);
+                    }
                 }
+                Debug.WriteLine(waitingNozzleMeasures.Count);
             }
         }
 
@@ -99,7 +107,10 @@ namespace NoSqlEngineConsoleApp
                 {
                     dbEngine.AddRefuel(waitingRefuel.First());
                     waitingRefuel.RemoveAt(0);
-                    ReadDataRefuel(1);
+                    if (waitingRefuel.Count == 0)
+                    {
+                        ReadDataRefuel(1);
+                    }
                 }
             }
         }
