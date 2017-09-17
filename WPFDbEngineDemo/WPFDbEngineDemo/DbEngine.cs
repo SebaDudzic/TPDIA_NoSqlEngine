@@ -63,11 +63,24 @@ namespace NoSqlEngineConsoleApp
             }
         }
 
-        public int GetNozzleMeasureCount()
+        public int GetNozzleMeasuresCount()
         {
             try
             {
                 Task<int> task = Task<int>.Factory.StartNew(() => ReadCollectionCount(nozzleMeasuresCollection).Result);
+                return task.Result;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
+
+        public int GetRefuelsCount()
+        {
+            try
+            {
+                Task<int> task = Task<int>.Factory.StartNew(() => ReadCollectionCount(refuelsCollection).Result);
                 return task.Result;
             }
             catch (Exception e)

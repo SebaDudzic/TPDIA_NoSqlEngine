@@ -45,7 +45,8 @@ namespace WPFDbEngineDemo
                 timeScaleLabel.Content = string.Format("{0:0.00}", GetSenderTimeScale());
                 currentSimulationTimeLabel.Content = dataSender.GetCurrentDataTime().ToString();
                 tankMeasuresCount.Content = dbEngine.GetTankMeasuresCount();
-                nozzleMeasuresCount.Content = dbEngine.GetNozzleMeasureCount();
+                nozzleMeasuresCount.Content = dbEngine.GetNozzleMeasuresCount();
+                refuelsCount.Content = dbEngine.GetRefuelsCount();
 
                 SetTankUI(1, tank1_LastRefreshLabel, tank1_FuelAmountLabel, tank1_FuelTemperatureLabel);
                 SetTankUI(2, tank2_LastRefreshLabel, tank2_FuelAmountLabel, tank2_FuelTemperatureLabel);
