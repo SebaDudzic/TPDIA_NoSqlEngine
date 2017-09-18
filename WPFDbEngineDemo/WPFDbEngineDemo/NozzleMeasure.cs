@@ -58,7 +58,7 @@ namespace NoSqlEngineConsoleApp
             var result = new BsonDocument()
             {
                 { "id", Guid.NewGuid().ToString("N") },
-                { "date", data.date },
+                { "date", data.date.ToString() },
                 { "locationID", data.locationID },
                 { "nozzleID", data.nozzleID },
                 { "tankID", data.tankID },
@@ -73,7 +73,7 @@ namespace NoSqlEngineConsoleApp
         public static NozzleMeasure Parse(BsonDocument doc)
         {
             var result = new NozzleMeasure();
-            result.date = doc["date"].ToUniversalTime();
+            result.date = DateTime.Parse(doc["date"].AsString);
             result.locationID = doc["locationID"].AsInt32;
             result.nozzleID = doc["nozzleID"].AsInt32;
             result.tankID = doc["tankID"].AsInt32;

@@ -16,6 +16,7 @@ namespace NoSqlEngineConsoleApp
         private IMongoCollection<BsonDocument> tankMeasuresCollection;
         private IMongoCollection<BsonDocument> nozzleMeasuresCollection;
         private IMongoCollection<BsonDocument> refuelsCollection;
+        private Func<DateTime> getTime;
 
         private const string DB_NAME = "db";
         private const string TANK_MEASURES_NAME = "TankMeasures";
@@ -30,6 +31,11 @@ namespace NoSqlEngineConsoleApp
             tankMeasuresCollection = _database.GetCollection<BsonDocument>(TANK_MEASURES_NAME);
             nozzleMeasuresCollection = _database.GetCollection<BsonDocument>(NOZZLE_MEASURES_NAME);
             refuelsCollection = _database.GetCollection<BsonDocument>(REFUELS_NAME);
+        }
+
+        public void SetTimeGetter(Func<DateTime> getTime)
+        {
+            this.getTime = getTime;
         }
 
         //--Public_Interface_Save------------------------------------//
@@ -142,6 +148,74 @@ namespace NoSqlEngineConsoleApp
             {
                 return tankMeasuresCollection.Aggregate().SortByDescending((a) => a["date"]).Limit(amount)
                     .ToList().Select(x => TankMeasure.Parse(x)).ToList();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public List<NozzleMeasure> GetLatestNozzleMeasures(int amount)
+        {
+            try
+            {
+                return nozzleMeasuresCollection.Aggregate().SortByDescending((a) => a["date"]).Limit(amount)
+                    .ToList().Select(x => NozzleMeasure.Parse(x)).ToList();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public List<Refuel> GetLatestRefuels(int amount)
+        {
+            try
+            {
+                return refuelsCollection.Aggregate().SortByDescending((a) => a["date"]).Limit(amount)
+                    .ToList().Select(x => Refuel.Parse(x)).ToList();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public List<TankMeasure> GetLatestTankMeasuresByTime(int hours)
+        {
+            try
+            { 
+                return tankMeasuresCollection.Aggregate().SortByDescending((a) => a["date"]).ToList()
+                .FindAll(x=>(getTime() - DateTime.Parse(x["date"].AsString)).TotalHours <= hours )
+                    .ToList().Select(x => TankMeasure.Parse(x)).ToList();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public List<NozzleMeasure> GetLatestNozzleMeasuresByTime(int hours)
+        {
+            try
+            {
+                return nozzleMeasuresCollection.Aggregate().SortByDescending((a) => a["date"]).ToList()
+                .FindAll(x => (getTime() - DateTime.Parse(x["date"].AsString)).TotalHours <= hours)
+                    .ToList().Select(x => NozzleMeasure.Parse(x)).ToList();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public List<Refuel> GetLatestRefuelsByTime(int hours)
+        {
+            try
+            {
+                return refuelsCollection.Aggregate().SortByDescending((a) => a["date"]).ToList()
+                .FindAll(x => (getTime() - DateTime.Parse(x["date"].AsString)).TotalHours <= hours)
+                    .ToList().Select(x => Refuel.Parse(x)).ToList();
             }
             catch (Exception e)
             {

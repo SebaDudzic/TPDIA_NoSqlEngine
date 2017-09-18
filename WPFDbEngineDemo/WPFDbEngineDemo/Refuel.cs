@@ -47,7 +47,7 @@ namespace NoSqlEngineConsoleApp
             var result = new BsonDocument()
             {
                 { "id", Guid.NewGuid().ToString("N") },
-                { "date", data.date },
+                { "date", data.date.ToString() },
                 { "tankID", data.tankID },
                 { "fuelCapacity", data.fuelCapacity },
                 { "tankSpeed", data.tankSpeed },
@@ -59,7 +59,7 @@ namespace NoSqlEngineConsoleApp
         public static Refuel Parse(BsonDocument doc)
         {
             var result = new Refuel();
-            result.date = doc["date"].ToUniversalTime();
+            result.date = DateTime.Parse(doc["date"].AsString);
             result.tankID = doc["tankID"].AsInt32;
             result.fuelCapacity = (float)doc["fuelCapacity"].AsDouble;
             result.tankSpeed = (float)doc["tankSpeed"].AsDouble;

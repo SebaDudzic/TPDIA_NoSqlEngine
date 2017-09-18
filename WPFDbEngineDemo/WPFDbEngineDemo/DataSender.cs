@@ -11,7 +11,7 @@ namespace NoSqlEngineConsoleApp
     class DataSender
     {
         private const int PRECACHED_TANK_MESUARES = 20;
-        private const int PRECACHED_NOZZLE_MESUARES = 2000;
+        private const int PRECACHED_NOZZLE_MESUARES = 100;
         private const int PRECACHED_REFUEL = 20;
         private const int REFRESH_TIME = 1000;
         private const string NOZZLE_MEASURES_FILE_PATH = "nozzleMeasures.log";

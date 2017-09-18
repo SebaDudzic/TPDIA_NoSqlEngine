@@ -35,6 +35,7 @@ namespace WPFDbEngineDemo
         {
             dbEngine = new DbEngine();
             dataSender = new DataSender(dbEngine, GetSenderTimeScale);
+            dbEngine.SetTimeGetter(dataSender.GetCurrentDataTime);
             RefreshUI();
         }
 
@@ -128,6 +129,45 @@ namespace WPFDbEngineDemo
         {
             List<TankMeasure> tankMeasures = dbEngine.GetLatestTankMeasures(Int32.Parse(TestReadLastTankMeasuresAmountTextBox.Text));
             MessageBox.Show(string.Format("Success! Readed measures count: {0}", tankMeasures.Count));
+        }
+
+        private void TestReadLastNozzleMeasuresAmount(object sender, RoutedEventArgs e)
+        {
+            List<NozzleMeasure> nozzleMeasures = dbEngine.GetLatestNozzleMeasures(Int32.Parse(TestReadLastNozzleMeasuresAmountTextBox.Text));
+            MessageBox.Show(string.Format("Success! Readed measures count: {0}", nozzleMeasures.Count));
+        }
+
+        private void TestReadLastRefuelsAmount(object sender, RoutedEventArgs e)
+        {
+            List<Refuel> refuelsCount = dbEngine.GetLatestRefuels(Int32.Parse(TestReadLastRefuelsAmountTextBox.Text));
+            MessageBox.Show(string.Format("Success! Readed refuels count: {0}", refuelsCount.Count));
+        }
+
+        private void TestReadLastTankMeasuresAmountByTime(object sender, RoutedEventArgs e)
+        {
+            List<TankMeasure> tankMeasures = dbEngine.GetLatestTankMeasuresByTime(Int32.Parse(TestReadLastTankMeasuresAmountTextBoxByTime.Text));
+            if (tankMeasures != null)
+            {
+                MessageBox.Show(string.Format("Success! Readed measures count: {0}", tankMeasures.Count));
+            }
+        }
+
+        private void TestReadLastNozzleMeasuresAmountByTime(object sender, RoutedEventArgs e)
+        {
+            List<NozzleMeasure> nozzleMeasures = dbEngine.GetLatestNozzleMeasuresByTime(Int32.Parse(TestReadLastNozzleMeasuresAmountTextBoxByTime.Text));
+            if (nozzleMeasures != null)
+            {
+                MessageBox.Show(string.Format("Success! Readed measures count: {0}", nozzleMeasures.Count));
+            }
+        }
+
+        private void TestReadLastRefuelsAmountByTime(object sender, RoutedEventArgs e)
+        {
+            List<Refuel> refuels = dbEngine.GetLatestRefuelsByTime(Int32.Parse(TestReadLastRefuelsAmountTextBoxByTime.Text));
+            if (refuels != null)
+            {
+                MessageBox.Show(string.Format("Success! Readed refuels count: {0}", refuels.Count));
+            }
         }
     }
 }

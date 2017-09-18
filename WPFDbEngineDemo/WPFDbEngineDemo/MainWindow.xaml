@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFDbEngineDemo"
         mc:Ignorable="d"
-        Title="DbEngineDemo" Height="700.8" Width="682">
+        Title="DbEngineDemo" Height="776.975" Width="682">
     <Grid>
         <Label Content="CurrentSimulationTime:" HorizontalAlignment="Left" Margin="17,10,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <Label x:Name="currentSimulationTimeLabel" Content="Label" HorizontalAlignment="Left" Margin="19,26,0,0" VerticalAlignment="Top" Width="127"/>
@@ -66,9 +66,44 @@
             </Grid>
         </GroupBox>
 
-        <Button Content="TestReadLastXTankMeasures" HorizontalAlignment="Left" Margin="13,620,0,0" VerticalAlignment="Top" Width="184" Height="36" Click="TestReadLastTankMeasuresAmount"/>
-        <TextBox x:Name="TestReadLastTankMeasuresAmountTextBox" HorizontalAlignment="Left" Height="22" Margin="107,592,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="87"/>
-        <Label Content="AmountToRead:" HorizontalAlignment="Left" Margin="13,588,0,0" VerticalAlignment="Top"/>
+        <GroupBox Header="Debug" HorizontalAlignment="Left" Height="180" Margin="20,549,0,0" VerticalAlignment="Top" Width="644" FontWeight="Bold">
+            <Grid>
+                <Canvas HorizontalAlignment="Left" Height="75" Margin="10,10,0,0" VerticalAlignment="Top" Width="192" Background="#FFFFFFFF">
+                    <Button Content="TestReadLastXTankMeasures" HorizontalAlignment="Left" VerticalAlignment="Top" Width="184" Height="36" Click="TestReadLastTankMeasuresAmount" Canvas.Left="4" Canvas.Top="28"/>
+                    <TextBox x:Name="TestReadLastTankMeasuresAmountTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="87" Canvas.Left="98"/>
+                    <Label Content="AmountToRead:" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="4" Canvas.Top="-4"/>
+                </Canvas>
+
+                <Canvas HorizontalAlignment="Left" Height="75" Margin="218,10,0,0" VerticalAlignment="Top" Width="192" Background="#FFFFFFFF">
+                    <Button Content="TestReadLastXNozzleMeasures" HorizontalAlignment="Left" VerticalAlignment="Top" Width="184" Height="36" Click="TestReadLastNozzleMeasuresAmount" Canvas.Left="4" Canvas.Top="28"/>
+                    <TextBox x:Name="TestReadLastNozzleMeasuresAmountTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="87" Canvas.Left="98"/>
+                    <Label Content="AmountToRead:" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="4" Canvas.Top="-4"/>
+                </Canvas>
+                <Canvas HorizontalAlignment="Left" Height="75" Margin="430,10,0,0" VerticalAlignment="Top" Width="192" Background="#FFFFFFFF">
+                    <Button Content="TestReadLastXRefuels" HorizontalAlignment="Left" VerticalAlignment="Top" Width="184" Height="36" Click="TestReadLastRefuelsAmount" Canvas.Left="4" Canvas.Top="28"/>
+                    <TextBox x:Name="TestReadLastRefuelsAmountTextBox" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="87" Canvas.Left="98"/>
+                    <Label Content="AmountToRead:" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="4" Canvas.Top="-4"/>
+                </Canvas>
+
+                <Canvas HorizontalAlignment="Left" Height="75" Margin="10,85,0,0" VerticalAlignment="Top" Width="192" Background="#FFFFFFFF">
+                    <Button Content="TestReadLastTankMeasures" HorizontalAlignment="Left" VerticalAlignment="Top" Width="184" Height="36" Click="TestReadLastTankMeasuresAmountByTime" Canvas.Left="4" Canvas.Top="28"/>
+                    <TextBox x:Name="TestReadLastTankMeasuresAmountTextBoxByTime" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="114" Canvas.Left="74"/>
+                    <Label Content="LastHours:" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="4" Canvas.Top="-4"/>
+                </Canvas>
+
+                <Canvas HorizontalAlignment="Left" Height="75" Margin="218,85,0,0" VerticalAlignment="Top" Width="192" Background="#FFFFFFFF">
+                    <Button Content="TestReadLastNozzleMeasures" HorizontalAlignment="Left" VerticalAlignment="Top" Width="184" Height="36" Click="TestReadLastNozzleMeasuresAmountByTime" Canvas.Left="4" Canvas.Top="28"/>
+                    <TextBox x:Name="TestReadLastNozzleMeasuresAmountTextBoxByTime" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="114" Canvas.Left="74"/>
+                    <Label Content="LastHours:" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="4" Canvas.Top="-4"/>
+                </Canvas>
+                <Canvas HorizontalAlignment="Left" Height="75" Margin="430,85,0,0" VerticalAlignment="Top" Width="192" Background="#FFFFFFFF">
+                    <Button Content="TestReadLastRefuels" HorizontalAlignment="Left" VerticalAlignment="Top" Width="184" Height="36" Click="TestReadLastRefuelsAmountByTime" Canvas.Left="4" Canvas.Top="28"/>
+                    <TextBox x:Name="TestReadLastRefuelsAmountTextBoxByTime" HorizontalAlignment="Left" Height="22" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="114" Canvas.Left="74"/>
+                    <Label Content="LastHours:" HorizontalAlignment="Left" VerticalAlignment="Top" Canvas.Left="4" Canvas.Top="-4"/>
+                </Canvas>
+            </Grid>
+        </GroupBox>
+
         <GroupBox Header="Nozzles" HorizontalAlignment="Left" Height="320" Margin="19,224,0,0" VerticalAlignment="Top" Width="644" FontWeight="Bold">
             <Grid>
                 <Canvas x:Name="nozzle13bg" HorizontalAlignment="Left" Height="92" Margin="6,5,0,0" VerticalAlignment="Top" Width="150" Background="#FFD8D8D8">
